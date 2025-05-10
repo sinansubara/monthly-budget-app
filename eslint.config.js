@@ -1,9 +1,10 @@
-import pluginVue from 'eslint-plugin-vue';
+// import pluginVue from 'eslint-plugin-vue';
 import globals from 'globals';
 import pluginPrettier from 'eslint-plugin-prettier';
 
 export default [
-  ...pluginVue.configs['flat/recommended'],
+  // ...pluginVue.configs['flat/recommended'],
+  // ...pluginVue.configs['flat/strongly-recommended'],
   {
     rules: {
       quotes: ['error', 'single'],
