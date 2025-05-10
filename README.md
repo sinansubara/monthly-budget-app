@@ -1,5 +1,42 @@
-# Vue 3 + Vite
+# Monthly Budget App
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a **Monthly Budget App** built using **Vue 3** and **Vite**. The purpose of this app is to help users track their income, expenses, and set financial goals. It includes features like expense tracking, income calculation, goal setting, and predefined fixed expenses.
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+### 1. Clone the repository
+
+If you haven't cloned the repository yet, run the following command:
+
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
+
+### 2. Install dependencies
+
+Run the following command to install the required dependencies:
+
+```bash
+npm install
+```
+
+### 3. Run the project locally
+
+To start the development server, run:
+
+```bash
+npm run dev
+```
+
+This will start the server on `http://localhost:5173`. You can open this URL in your browser to view the app.
+
+---
+
+## Build for Production
+
+To build the project for production, run:
+
+```bash
+npm run build
+```
+
+The production-ready app will be located in the `/dist` folder.
