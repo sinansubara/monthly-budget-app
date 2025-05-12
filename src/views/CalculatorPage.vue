@@ -2,6 +2,7 @@
   <div class="calculator-page">
     <DashboardHeader />
 
+    <InfoCard title="Calculation" />
     <IconCustom
       name="icon-add"
       class="circle-add-icon"
@@ -13,6 +14,7 @@
 <script setup>
 import DashboardHeader from '@/components/widgets/DashboardHeader.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
+import InfoCard from '@/components/widgets/InfoCard.vue';
 
 const handleNewExpense = () => {
   console.log('New expense modal should open');
@@ -28,6 +30,7 @@ const handleNewExpense = () => {
   padding: 30px 32px 56px;
   background-color: $dark-background;
   height: 100%;
+  gap: 32px;
 
   .dashboard-header {
     padding-bottom: 24px;
