@@ -163,6 +163,7 @@ onMounted(() => {
       img {
         max-width: 100%;
         height: auto;
+        overflow: hidden;
       }
     }
     .landing-form {
