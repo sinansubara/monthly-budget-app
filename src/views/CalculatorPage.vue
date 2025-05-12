@@ -5,7 +5,7 @@
     <InfoCard title="Calculation" />
     <IconCustom
       name="icon-add"
-      class="circle-add-icon"
+      class="circle-add-icon box-shadow"
       @click="handleNewExpense"
     />
   </div>

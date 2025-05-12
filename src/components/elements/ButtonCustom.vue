@@ -1,6 +1,6 @@
 <template>
   <button
-    class="button-custom-wrap"
+    class="button-custom-wrap box-shadow"
     :disabled="props.disabled"
     @click="handleClick"
   >
