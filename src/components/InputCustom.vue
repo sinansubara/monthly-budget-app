@@ -7,6 +7,7 @@
     :placeholder="placeholder"
     :min="inputType === 'number' ? minNumber : undefined"
     :max="inputType === 'number' ? maxNumber : undefined"
+    :step="inputType === 'number' ? 0.01 : undefined"
     spellcheck="false"
     @input="handleInput"
   />
