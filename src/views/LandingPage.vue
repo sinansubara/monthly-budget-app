@@ -176,11 +176,9 @@ onMounted(() => {
       }
     }
   }
-}
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  // Tablet specific styles
-  .landing-page {
+  /* Small devices (portrait tablets and large phones, 600px and up) */
+  @media only screen and (min-width: 600px) {
+    // Tablet specific styles
     .image-container {
       display: flex;
       flex-direction: column;
@@ -208,21 +206,17 @@ onMounted(() => {
       flex-basis: 50%;
     }
   }
-}
 
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  // Desktop specific styles
-  .landing-page {
+  /* Large devices (laptops/desktops, 992px and up) */
+  @media only screen and (min-width: 992px) {
+    // Desktop specific styles
     .landing-form {
       padding-left: 120px;
       padding-right: 120px;
     }
   }
-}
 
-@media only screen and (min-height: 618px) {
-  .landing-page {
+  @media only screen and (min-height: 618px) {
     .landing-form {
       justify-content: center;
     }
