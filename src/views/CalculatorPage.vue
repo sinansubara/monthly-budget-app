@@ -42,6 +42,7 @@ const handleNewExpense = () => {
     position: absolute;
     bottom: 30px;
     right: 30px;
+    border-radius: 50%;
   }
 
   @media (min-width: 600px) {
