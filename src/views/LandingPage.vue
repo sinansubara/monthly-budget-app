@@ -44,8 +44,8 @@
 <script setup>
 // Detect if the screen is in desktop view using a computed property
 import { ref, onMounted, reactive, computed } from 'vue';
-import InputCustom from '@/components/InputCustom.vue';
-import ButtonCustom from '@/components/ButtonCustom.vue';
+import InputCustom from '@/components/elements/InputCustom.vue';
+import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { setUserData } from '@/utilities/localStorageUtils';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/useUserStore';
