@@ -4,14 +4,12 @@ const routes = [
   {
     path: '/',
     name: 'Landing',
-    // import LandingPage component dynamically
     component: () => import('./views/LandingPage.vue'),
   },
   {
-    path: '/home',
-    name: 'Home',
-    // import HomePage component dynamically
-    component: () => import('./views/HomePage.vue'),
+    path: '/calculator',
+    name: 'Calculator',
+    component: () => import('./views/CalculatorPage.vue'),
   },
 ];
 
