@@ -1,11 +1,28 @@
 <template>
-  <div></div>
+  <div class="calculator-page">
+    <DashboardHeader />
+  </div>
 </template>
 
-<script>
-export default {
-  setup() {
-    return {};
-  },
-};
+<script setup>
+import DashboardHeader from '@/components/widgets/DashboardHeader.vue';
 </script>
+
+<style lang="scss">
+/* Responsive Media Queries */
+/* Mobile first approach */
+.calculator-page {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 32px 56px;
+  background-color: $dark-background;
+  height: 100%;
+
+  // @media (min-width: 600px) {
+  // }
+  // @media (min-width: 768px) {
+  // }
+  // @media (min-width: 1024px) {
+  // }
+}
+</style>
