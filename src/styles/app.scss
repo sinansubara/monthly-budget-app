@@ -5,18 +5,33 @@
   box-sizing: border-box;
 }
 
-/* Variables */
-:root {
-  --text-color: #333;
-  --light-color: #f9f9f9;
-}
-
 /* Base Styles */
 body {
-  font-family: 'Roboto', Arial, sans-serif;
-  line-height: 1.6;
-  color: var(--text-color);
-  background-color: var(--light-color);
+  font-family: $font-family;
+  color: $dark-text;
+  background-color: $light-background;
+  user-select: none;
+}
+
+/* Global Styles */
+.accent-text-color {
+  color: $accent-text;
+}
+.light-text-color {
+  color: $light-text;
+}
+.dark-text-color {
+  color: $dark-text;
+}
+.box-background {
+  background-color: $box-background;
+}
+.dark-background {
+  background-color: $dark-background;
+}
+.light-background {
+  background-color: $light-background;
+}
 }
 
 /* Responsive Media Queries */
