@@ -44,6 +44,11 @@ const handleClick = () => {
   border: none;
   outline: none;
   cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($secondary-color, 5%);
+  }
 
   .button-text {
     font-size: 14px;
