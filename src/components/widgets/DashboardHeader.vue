@@ -12,6 +12,11 @@
           <span class="accent-text-color">Budget</span>
         </div>
       </div>
+      <ButtonCustom
+        class="new-expense-button"
+        :button-text="'New Expense'"
+        @click="handleNewExpense"
+      />
     </div>
     <span class="header-welcome-text"> Welcome, {{ userName }}! </span>
   </div>
@@ -19,11 +24,16 @@
 
 <script setup>
 import IconCustom from '@/components/elements/IconCustom.vue';
+import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import { computed } from 'vue';
 
 const userStore = useUserStore();
 const userName = computed(() => userStore.getName);
+
+const handleNewExpense = () => {
+  console.log('New expense modal should open');
+};
 </script>
 
 <style lang="scss">
@@ -62,12 +72,31 @@ const userName = computed(() => userStore.getName);
         justify-content: flex-start;
       }
     }
+
+    .new-expense-button {
+      display: none;
+    }
   }
 
   .header-welcome-text {
     font-size: 16px;
     line-height: 24px;
     color: $white-text;
+  }
+
+  @media only screen and (min-width: 600px) {
+    .dashboard-header-wrap {
+      .new-expense-button {
+        display: flex;
+        padding: 10px 32px;
+        margin-left: auto;
+
+        .button-text {
+          font-size: 18px;
+          line-height: 22px;
+        }
+      }
+    }
   }
 }
 </style>
