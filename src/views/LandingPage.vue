@@ -170,6 +170,18 @@ onMounted(() => {
     }
   }
 }
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  // Desktop specific styles
+  .landing-page {
+    .landing-form {
+      padding-left: 120px;
+      padding-right: 120px;
+    }
+  }
+}
+
 @media only screen and (min-height: 618px) {
   .landing-page {
     .landing-form {
