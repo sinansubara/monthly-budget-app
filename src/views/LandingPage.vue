@@ -48,7 +48,10 @@ import InputCustom from '@/components/InputCustom.vue';
 import ButtonCustom from '@/components/ButtonCustom.vue';
 import { setUserData } from '@/utilities/localStorageUtils';
 import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/useUserStore';
+
 const router = useRouter();
+const userStore = useUserStore();
 
 const isDesktop = ref(true);
 
@@ -112,6 +115,7 @@ const checkScreenSize = () => {
 
 const handleCalculation = () => {
   if (!isFormValid.value) return;
+  userStore.login(currentUserMapData.value);
   // set user data to local storage
   setUserData(currentUserMapData.value);
   // navigate to the next page
