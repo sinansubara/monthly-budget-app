@@ -14,51 +14,57 @@ const browserStorageRemoveItem = (key) => {
   window?.localStorage.removeItem(key);
 };
 
-const getCurrentUserIdKey = () => {
-  return 'current_user_id';
+const getCurrentUserDataKey = () => 'current_user_data';
+
+const getUserData = () => {
+  const currentUserDataKey = getCurrentUserDataKey();
+  const currentUserData = browserStorageGetItem(currentUserDataKey);
+  return currentUserData ?? null;
 };
 
-const getCurrentUserId = () => {
-  const currentUserKey = getCurrentUserIdKey();
-  const currentUserId = browserStorageGetItem(currentUserKey);
-  return currentUserId ?? null;
+const setUserData = (userData) => {
+  const currentUserDataKey = getCurrentUserDataKey();
+  browserStorageSetItem(currentUserDataKey, userData);
 };
 
-const setCurrentUserId = (userId) => {
-  const currentUserKey = getCurrentUserIdKey();
-  browserStorageSetItem(currentUserKey, userId);
+const removeUserData = () => {
+  const currentUserDataKey = getCurrentUserDataKey();
+  browserStorageRemoveItem(currentUserDataKey);
 };
 
-const getUserKey = (userId) => {
-  return `user_${userId}`;
-};
-
-const getUserData = (userId) => {
-  // implement logic for current user also here
-  const id = userId ?? getCurrentUserId();
-  if (!id) return null;
-  const userKey = getUserKey(id);
-  const userData = browserStorageGetItem(userKey);
-  return userData;
-};
-
-const setUserData = (userId, data) => {
-  const userKey = getUserKey(userId);
-  browserStorageSetItem(userKey, data);
-};
-
-const removeCurrentUserId = () => {
-  const currentUserKey = getCurrentUserIdKey();
-  browserStorageRemoveItem(currentUserKey);
-};
+// NOSONAR - can be used in future for storing multiple users
+// const getCurrentUserIdKey = () => {
+//   return 'current_user_id';
+// };
+// const setCurrentUserId = (userId) => {
+//   const currentUserKey = getCurrentUserIdKey();
+//   browserStorageSetItem(currentUserKey, userId);
+// };
+// const getCurrentUserId = () => {
+//   const currentUserKey = getCurrentUserIdKey();
+//   const currentUserId = browserStorageGetItem(currentUserKey);
+//   return currentUserId ?? null;
+// };
+// const getUserKey = (userId) => {
+//   return `user_${userId}`;
+// };
+// const getUserData = (userId) => {
+//   const id = userId ?? getCurrentUserId();
+//   if (!id) return null;
+//   const userKey = getUserKey(id);
+//   const userData = browserStorageGetItem(userKey);
+//   return userData;
+// };
+// const setUserData = (userId, data) => {
+//   const userKey = getUserKey(userId);
+//   browserStorageSetItem(userKey, data);
+// };
 
 export {
   browserStorageGetItem,
   browserStorageSetItem,
   browserStorageRemoveItem,
-  getCurrentUserId,
-  setCurrentUserId,
   getUserData,
   setUserData,
-  removeCurrentUserId,
+  removeUserData,
 };
