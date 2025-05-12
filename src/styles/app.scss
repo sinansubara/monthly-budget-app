@@ -42,6 +42,9 @@ body {
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+.box-shadow {
+  box-shadow: 0px 4px 10px $box-shadow-color;
+}
 
 .main-header-title {
   display: flex;
