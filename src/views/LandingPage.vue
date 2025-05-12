@@ -15,7 +15,7 @@
     <!-- Form Section for Inputs and Button -->
     <div class="landing-form">
       <div class="landing-form-container">
-        <div class="landing-form-title">
+        <div class="main-header-title">
           <span>Monthly</span>
           <span class="accent-text-color">Budget</span>
         </div>
@@ -157,14 +157,7 @@ onMounted(() => {
       flex-direction: column;
       padding: 0px 8px;
 
-      .landing-form-title {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-wrap: wrap;
-        font-size: 60px;
-        color: $light-text;
-        column-gap: 16px;
+      .main-header-title {
         margin-bottom: 52px;
       }
 

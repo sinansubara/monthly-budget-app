@@ -43,6 +43,16 @@ body {
   white-space: nowrap;
 }
 
+.main-header-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  font-size: 60px;
+  color: $light-text;
+  column-gap: 16px;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
