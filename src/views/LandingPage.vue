@@ -75,7 +75,13 @@ const formData = reactive([
 const isFormValid = computed(() => {
   return formData.every((item) => {
     if (item.type === 'number') {
-      return item.value && item.minNumber && item.value >= item.minNumber;
+      const itemValue = parseFloat(item.value);
+      if (item.id === 'goals') {
+        const income = formData.find((i) => i.id === 'income');
+        const incomeValue = parseFloat(income.value);
+        return itemValue <= incomeValue;
+      }
+      return itemValue >= item.minNumber;
     }
     return item.value && item.value.trim() !== '';
   });
