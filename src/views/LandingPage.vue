@@ -46,6 +46,9 @@
 import { ref, onMounted, reactive, computed } from 'vue';
 import InputCustom from '@/components/InputCustom.vue';
 import ButtonCustom from '@/components/ButtonCustom.vue';
+import { setUserData } from '@/utilities/localStorageUtils';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const isDesktop = ref(true);
 
@@ -87,6 +90,18 @@ const isFormValid = computed(() => {
   });
 });
 
+const currentUserMapData = computed(() => {
+  return formData.reduce(
+    (acc, item) => {
+      acc[item.id] = item.value;
+      return acc;
+    },
+    {
+      expenses: [],
+    },
+  );
+});
+
 const checkScreenSize = () => {
   if (window.innerWidth >= 600) {
     isDesktop.value = true; // Show the image for desktop
@@ -96,8 +111,11 @@ const checkScreenSize = () => {
 };
 
 const handleCalculation = () => {
-  // Handle the calculation logic here
-  console.log('Calculating with data:', formData);
+  if (!isFormValid.value) return;
+  // set user data to local storage
+  setUserData(currentUserMapData.value);
+  // navigate to the next page
+  router.push({ name: 'calculator' });
 };
 
 onMounted(() => {
