@@ -5,9 +5,7 @@
     :value="value"
     :type="inputType"
     :placeholder="placeholder"
-    :min="inputType === 'number' ? minNumber : undefined"
-    :max="inputType === 'number' ? maxNumber : undefined"
-    :step="inputType === 'number' ? 0.01 : undefined"
+    v-bind="numberInputAttrs"
     spellcheck="false"
     @input="handleInput"
   />
@@ -49,6 +47,17 @@ const inputValue = computed({
   set(value) {
     emit('input', value);
   },
+});
+
+const numberInputAttrs = computed(() => {
+  if (props.inputType === 'number') {
+    return {
+      min: props.minNumber,
+      max: props.maxNumber,
+      step: 0.01,
+    };
+  }
+  return {};
 });
 
 const handleInput = (event) => {
