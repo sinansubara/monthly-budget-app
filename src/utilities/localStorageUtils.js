@@ -24,6 +24,11 @@ const getCurrentUserId = () => {
   return currentUserId ?? null;
 };
 
+const setCurrentUserId = (userId) => {
+  const currentUserKey = getCurrentUserIdKey();
+  browserStorageSetItem(currentUserKey, userId);
+};
+
 const getUserKey = (userId) => {
   return `user_${userId}`;
 };
@@ -37,10 +42,23 @@ const getUserData = (userId) => {
   return userData;
 };
 
+const setUserData = (userId, data) => {
+  const userKey = getUserKey(userId);
+  browserStorageSetItem(userKey, data);
+};
+
+const removeCurrentUserId = () => {
+  const currentUserKey = getCurrentUserIdKey();
+  browserStorageRemoveItem(currentUserKey);
+};
+
 export {
   browserStorageGetItem,
   browserStorageSetItem,
   browserStorageRemoveItem,
   getCurrentUserId,
+  setCurrentUserId,
   getUserData,
+  setUserData,
+  removeCurrentUserId,
 };
