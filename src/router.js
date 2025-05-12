@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import { getUserData } from '@/utilities/localStorageUtils';
+import { useUserStore } from '@/stores/useUserStore';
 
 const routes = [
   {
@@ -27,9 +27,9 @@ const router = createRouter({
 });
 
 // Global navigation guard that checks authentication requirements
-router.beforeEach((to, from, next) => {
-  const userData = getUserData();
-  const isLoggedIn = !!userData;
+router.beforeEach((to, _, next) => {
+  const userStore = useUserStore();
+  const isLoggedIn = userStore.getIsAuthenticated;
 
   // If route requires auth and user is not logged in, redirect to landing
   if (to.meta.requiresAuth && !isLoggedIn) {
