@@ -3,12 +3,12 @@ import { createRouter, createWebHistory } from 'vue-router';
 const routes = [
   {
     path: '/',
-    name: 'Landing',
+    name: 'landing',
     component: () => import('./views/LandingPage.vue'),
   },
   {
     path: '/calculator',
-    name: 'Calculator',
+    name: 'calculator',
     component: () => import('./views/CalculatorPage.vue'),
   },
 ];
