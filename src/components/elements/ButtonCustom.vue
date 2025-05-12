@@ -53,7 +53,7 @@ const handleClick = () => {
   .button-text {
     font-size: 14px;
     line-height: 20px;
-    color: $dark-text;
+    color: $black-text;
   }
 }
 </style>
