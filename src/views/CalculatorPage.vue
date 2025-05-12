@@ -2,7 +2,11 @@
   <div class="calculator-page">
     <DashboardHeader />
 
-    <InfoCard title="Calculation" />
+    <InfoCard title="Calculation">
+      <template #content>
+        <BudgetOverview />
+      </template>
+    </InfoCard>
     <IconCustom
       name="icon-add"
       class="circle-add-icon box-shadow"
@@ -15,6 +19,7 @@
 import DashboardHeader from '@/components/widgets/DashboardHeader.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import InfoCard from '@/components/widgets/InfoCard.vue';
+import BudgetOverview from '@/components/widgets/BudgetOverview.vue';
 
 const handleNewExpense = () => {
   console.log('New expense modal should open');
