@@ -147,7 +147,7 @@ onMounted(() => {
     flex-direction: column;
     flex: 1;
     padding: 27px;
-    color: #fff;
+    color: $white-text;
     text-align: center;
     height: 100%;
     overflow: auto;
