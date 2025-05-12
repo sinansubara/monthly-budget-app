@@ -20,22 +20,25 @@ body {
 
 /* Global Styles */
 .accent-text-color {
-  color: $accent-text;
+  color: $accent-text !important;
+}
+.secondary-text-color {
+  color: $secondary-text !important;
 }
 .light-text-color {
-  color: $light-text;
+  color: $light-text !important;
 }
 .dark-text-color {
-  color: $dark-text;
+  color: $dark-text !important;
 }
 .box-background {
-  background-color: $box-background;
+  background-color: $box-background !important;
 }
 .dark-background {
-  background-color: $dark-background;
+  background-color: $dark-background !important;
 }
 .light-background {
-  background-color: $light-background;
+  background-color: $light-background !important;
 }
 .truncate {
   overflow: hidden;
@@ -43,7 +46,7 @@ body {
   white-space: nowrap;
 }
 .box-shadow {
-  box-shadow: 0px 4px 10px $box-shadow-color;
+  box-shadow: 0px 4px 10px $box-shadow-color !important;
 }
 
 .main-header-title {
