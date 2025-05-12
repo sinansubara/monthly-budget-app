@@ -68,7 +68,7 @@ const formData = reactive([
     placeholder: 'Insert Your Goals',
     value: '',
     type: 'number',
-    minNumber: 1,
+    minNumber: 0,
   },
 ]);
 
