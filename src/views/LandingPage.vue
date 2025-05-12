@@ -33,6 +33,7 @@
         </div>
         <ButtonCustom
           :button-text="'Start Your Calculation'"
+          :disabled="!isFormValid"
           @click="handleCalculation"
         />
       </div>
@@ -42,7 +43,7 @@
 
 <script setup>
 // Detect if the screen is in desktop view using a computed property
-import { ref, onMounted, reactive } from 'vue';
+import { ref, onMounted, reactive, computed } from 'vue';
 import InputCustom from '@/components/InputCustom.vue';
 import ButtonCustom from '@/components/ButtonCustom.vue';
 
@@ -70,6 +71,15 @@ const formData = reactive([
     minNumber: 1,
   },
 ]);
+
+const isFormValid = computed(() => {
+  return formData.every((item) => {
+    if (item.type === 'number') {
+      return item.value && item.minNumber && item.value >= item.minNumber;
+    }
+    return item.value && item.value.trim() !== '';
+  });
+});
 
 const checkScreenSize = () => {
   if (window.innerWidth >= 600) {
