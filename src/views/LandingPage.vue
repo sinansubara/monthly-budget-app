@@ -107,12 +107,12 @@ onMounted(() => {
   .landing-form {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     flex: 1;
     padding: 27px;
     color: #fff;
     text-align: center;
     height: 100%;
+    overflow: auto;
 
     .landing-form-container {
       display: flex;
@@ -167,6 +167,13 @@ onMounted(() => {
     }
     .landing-form {
       flex-basis: 50%;
+    }
+  }
+}
+@media only screen and (min-height: 618px) {
+  .landing-page {
+    .landing-form {
+      justify-content: center;
     }
   }
 }
