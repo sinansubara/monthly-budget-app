@@ -33,9 +33,13 @@ export const useUserStore = defineStore('user', {
     },
     getRemainingBudget: (state) => {
       const income = parseFloat(state.user.income) || 0;
-      const goals = parseFloat(state.user.goals) || 0;
       const totalExpenses = state.getTotalExpenses;
-      return income - goals - totalExpenses;
+      return income - totalExpenses;
+    },
+    getRemainingBudgetDeductingGoals: (state) => {
+      const remainingBudget = state.getRemainingBudget;
+      const goals = parseFloat(state.user.goals) || 0;
+      return remainingBudget - goals;
     },
     getIsAuthenticated: (state) => state.isAuthenticated,
   },
