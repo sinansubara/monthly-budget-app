@@ -44,8 +44,8 @@ const handleNewExpense = () => {
 
   .circle-add-icon {
     display: flex;
-    position: absolute;
-    bottom: 30px;
+    position: fixed;
+    bottom: 22px;
     right: 30px;
     border-radius: 50%;
   }
