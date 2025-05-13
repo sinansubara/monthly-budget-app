@@ -9,7 +9,7 @@
         class="image-placeholder"
         :image-name="expense.logo"
       />
-      <span class="fix-expense-name">{{ expense.name }}</span>
+      <span class="fix-expense-name truncate">{{ expense.name }}</span>
       <ButtonCustom
         button-text="select"
         button-variation="small-button"
