@@ -20,7 +20,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   background-color: $box-background;
-  gap: 4px;
+  gap: 1px;
   border-radius: 4px;
   padding: 10px 2px;
   width: 100%;
