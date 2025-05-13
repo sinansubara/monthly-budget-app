@@ -9,7 +9,10 @@
     </InfoCard>
     <InfoCard title="Optionals">
       <template #content>
-        <CardSection title="Choose any fix expenses">
+        <CardSection
+          title="Choose any fix expenses"
+          class="section-fix-expenses"
+        >
           <FixExpenses />
         </CardSection>
         <GoalsSection />
@@ -64,6 +67,13 @@ const handleNewExpense = () => {
   .goals-section {
     padding-top: 13px;
     border-top: 1px dotted $border-color;
+  }
+
+  .card-section {
+    &.section-fix-expenses {
+      gap: 24px;
+      padding: 16px 14px 22px;
+    }
   }
 
   @media (min-width: 600px) {
