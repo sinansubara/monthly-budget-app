@@ -2,7 +2,7 @@
   <div class="expenses-list">
     <div class="expenses-list-header">
       <span class="expenses-list-title">Expenses</span>
-      <div class="expenses-filter-dropdown">Filter dropdown</div>
+      <FilterCategory />
     </div>
     <div
       v-for="(expense, index) in expenses"
@@ -44,6 +44,7 @@ import { useExpenseStore } from '@/stores/useExpensesStore';
 import { ExpenseCategoryNames } from '@/constants/expenseCategories.js';
 import ImageCircle from '@/components/elements/ImageCircle.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
+import FilterCategory from '@/components/widgets/FilterCategory.vue';
 import convertToCurrency from '@/utilities/convertToCurrency.js';
 
 const expenseStore = useExpenseStore();
@@ -78,6 +79,7 @@ const formatDate = (date) => {
   .expenses-list-header {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 8px;
     padding-bottom: 22px;
 
@@ -88,6 +90,7 @@ const formatDate = (date) => {
     }
 
     .expenses-filter-dropdown {
+      display: flex;
       color: white;
     }
   }
