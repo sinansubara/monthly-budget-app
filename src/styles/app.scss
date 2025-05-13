@@ -59,6 +59,12 @@ body {
   column-gap: 16px;
 }
 
+.card-header-title {
+  font-size: 30px;
+  line-height: 36px;
+  color: $dark-text;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {

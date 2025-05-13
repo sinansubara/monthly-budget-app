@@ -36,12 +36,6 @@ defineProps({
     &:not(:last-child) {
       border-bottom: 1px dotted $border-color;
     }
-
-    .card-header-title {
-      font-size: 30px;
-      line-height: 36px;
-      color: $dark-text;
-    }
   }
 }
 </style>
