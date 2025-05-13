@@ -99,6 +99,8 @@ const handleResetExpenses = () => {
     flex-direction: row;
     gap: 8px;
     width: 100%;
+    padding-bottom: 24px;
+    border-bottom: 1px dotted $border-color;
 
     .money-amount {
       font-size: 18px;
