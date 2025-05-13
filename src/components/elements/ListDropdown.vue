@@ -6,10 +6,14 @@
       @click="toggleDropdown"
     >
       <div class="dropdown-button-content">
-        <span class="dropdown-label truncate">Filter Expenses</span>
+        <span
+          v-if="dropdownLabel"
+          class="dropdown-label truncate"
+          >{{ dropdownLabel }}</span
+        >
         <div class="dropdown-text-wrap">
           <span class="dropdown-selected-text truncate">{{
-            selectedOption
+            selectedOption.name
           }}</span>
           <IconCustom
             name="arrow-down"
@@ -27,11 +31,11 @@
     >
       <ul>
         <li
-          v-for="category in filterCategories"
-          :key="category"
-          @click="selectOption(category)"
+          v-for="item in items"
+          :key="item.id"
+          @click="selectOption(item)"
         >
-          {{ category }}
+          {{ item.name }}
         </li>
       </ul>
     </div>
@@ -39,24 +43,34 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue';
-import { ExpenseCategoryNames } from '@/constants/expenseCategories.js';
+import { ref } from 'vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 
-const DEFAULT_CATEGORY_ALL = 'All';
+const props = defineProps({
+  items: {
+    type: Array,
+    default: () => [],
+  },
+  modelValue: {
+    type: Object,
+    default: () => ({
+      id: 'All',
+      name: 'All',
+    }),
+  },
+  dropdownLabel: {
+    type: String,
+    default: '',
+  },
+});
+
+const emit = defineEmits(['update:modelValue']);
 
 // Reactive state
 const isDropdownOpen = ref(false); // Track dropdown open/close state
-const selectedOption = ref(DEFAULT_CATEGORY_ALL); // Default selected option
+const selectedOption = ref(props.modelValue); // Default selected option
 
-const categoriesMapped = computed(() => {
-  return Object.values(ExpenseCategoryNames);
-});
-const filterCategories = computed(() => [
-  DEFAULT_CATEGORY_ALL,
-  ...categoriesMapped.value,
-]);
 // Toggle the dropdown open/close state
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
@@ -66,6 +80,8 @@ const toggleDropdown = () => {
 const selectOption = (option) => {
   selectedOption.value = option; // Update selected option
   isDropdownOpen.value = false; // Close dropdown after selection
+
+  emit('update:modelValue', option); // Emit the selected item
 };
 </script>
 
