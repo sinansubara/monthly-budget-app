@@ -24,16 +24,23 @@
         }}</span>
       </CardSection>
     </div>
+    <ButtonCustom
+      :button-text="'Reset Expenses'"
+      @click="handleResetExpenses"
+    />
   </div>
 </template>
 
 <script setup>
 import CardSection from '@/components/widgets/CardSection.vue';
 import CircularProgress from '@/components/widgets/CircularProgress.vue';
+import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { useUserStore } from '@/stores/useUserStore';
+import { useExpenseStore } from '@/stores/useExpensesStore';
 import { computed } from 'vue';
 
 const userStore = useUserStore();
+const expenseStore = useExpenseStore();
 
 const convertToCurrency = (value) => {
   return new Intl.NumberFormat('en-GB', {
@@ -69,6 +76,10 @@ const availableFormatted = computed(() =>
 const spentFormatted = computed(() =>
   convertToCurrency(convertToNumber(userStore.getTotalExpenses)),
 );
+
+const handleResetExpenses = () => {
+  expenseStore.resetExpenses();
+};
 </script>
 
 <style lang="scss">

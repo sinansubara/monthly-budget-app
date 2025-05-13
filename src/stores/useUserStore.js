@@ -107,5 +107,10 @@ export const useUserStore = defineStore('user', {
       this.user.expenses = this.user.expenses.filter((e) => e.id !== expenseId);
       setUserData(this.user); // Update user data in localStorage
     },
+
+    setExpenses(expenses) {
+      this.user.expenses = expenses;
+      setUserData(this.user); // Update user data in localStorage
+    },
   },
 });
