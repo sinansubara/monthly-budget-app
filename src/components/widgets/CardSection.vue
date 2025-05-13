@@ -22,7 +22,7 @@ defineProps({
   background-color: $box-background;
   gap: 1px;
   border-radius: 4px;
-  padding: 10px 2px;
+  padding: 10px 8px;
   width: 100%;
   flex: 1;
   overflow: hidden;
