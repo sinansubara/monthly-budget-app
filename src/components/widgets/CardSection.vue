@@ -18,12 +18,14 @@ defineProps({
 .card-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  text-align: center;
   background-color: $box-background;
   gap: 1px;
   border-radius: 4px;
   padding: 10px 2px;
   width: 100%;
+  flex: 1;
+  overflow: hidden;
 
   .card-section-title {
     font-size: 12px;

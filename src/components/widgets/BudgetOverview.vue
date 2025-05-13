@@ -92,6 +92,9 @@ const handleResetExpenses = () => {
     font-size: 26px;
     line-height: 36px;
     color: $dark-text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .money-section-wrap {
