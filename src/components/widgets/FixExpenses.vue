@@ -20,11 +20,13 @@
 </template>
 
 <script setup>
+import { computed } from 'vue';
 import fixedExpenses from '@/data/fixedExpenses.json';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import ImageCircle from '@/components/elements/ImageCircle.vue';
+import { useExpenseStore } from '@/stores/useExpensesStore';
 
-import { computed } from 'vue';
+const expenseStore = useExpenseStore();
 
 const fixExpenses = computed(() => {
   return fixedExpenses.map((expense) => ({
@@ -35,8 +37,7 @@ const fixExpenses = computed(() => {
 });
 
 const handleSelectExpense = (expense) => {
-  console.log(`Selected expense: ${expense.name} - ${expense.amount}`);
-  // Here you can add logic to handle the selected expense
+  expenseStore.addExpense(expense);
 };
 </script>
 
