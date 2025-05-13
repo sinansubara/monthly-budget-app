@@ -18,6 +18,7 @@
         <GoalsSection />
       </template>
     </InfoCard>
+    <ExpensesList />
     <IconCustom
       name="icon-add"
       class="circle-add-icon box-shadow"
@@ -34,7 +35,7 @@ import BudgetOverview from '@/components/widgets/BudgetOverview.vue';
 import CardSection from '@/components/widgets/CardSection.vue';
 import FixExpenses from '@/components/widgets/FixExpenses.vue';
 import GoalsSection from '@/components/widgets/GoalsSection.vue';
-
+import ExpensesList from '@/components/widgets/ExpensesList.vue';
 const handleNewExpense = () => {
   console.log('New expense modal should open');
 };
