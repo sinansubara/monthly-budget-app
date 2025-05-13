@@ -38,16 +38,10 @@ import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import { useExpenseStore } from '@/stores/useExpensesStore';
 import { computed } from 'vue';
+import convertToCurrency from '@/utilities/convertToCurrency';
 
 const userStore = useUserStore();
 const expenseStore = useExpenseStore();
-
-const convertToCurrency = (value) => {
-  return new Intl.NumberFormat('en-GB', {
-    style: 'currency',
-    currency: 'GBP',
-  }).format(value);
-};
 
 const convertToNumber = (value) => {
   return typeof value === 'number' ? value : parseFloat(value);
