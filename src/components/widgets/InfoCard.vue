@@ -3,12 +3,10 @@
     <div class="card-header">
       <span class="card-header-title">{{ title }}</span>
     </div>
-    <div
+    <slot
       v-if="$slots.content"
-      class="card-body"
-    >
-      <slot name="content"></slot>
-    </div>
+      name="content"
+    ></slot>
   </div>
 </template>
 
