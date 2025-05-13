@@ -43,7 +43,7 @@
 
 <script setup>
 // Detect if the screen is in desktop view using a computed property
-import { ref, onMounted, reactive, computed } from 'vue';
+import { ref, onMounted, reactive, computed, onUnmounted } from 'vue';
 import InputCustom from '@/components/elements/InputCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { setUserData } from '@/utilities/localStorageUtils';
@@ -125,6 +125,10 @@ const handleCalculation = () => {
 onMounted(() => {
   checkScreenSize();
   window.addEventListener('resize', checkScreenSize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('resize', checkScreenSize);
 });
 </script>
 
