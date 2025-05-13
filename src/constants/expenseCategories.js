@@ -8,3 +8,14 @@ export const ExpenseCategory = {
   VARIOUS: 'various',
   RENT: 'rent',
 };
+
+export const ExpenseCategoryNames = {
+  [ExpenseCategory.OCIO]: 'Hobbie',
+  [ExpenseCategory.FOOD]: 'Food',
+  [ExpenseCategory.SALUD]: 'Health',
+  [ExpenseCategory.SAVINGS]: 'Savings',
+  [ExpenseCategory.DEBTS]: 'Debts',
+  [ExpenseCategory.SUBSCRIPTION]: 'Subscription',
+  [ExpenseCategory.VARIOUS]: 'Various',
+  [ExpenseCategory.RENT]: 'Rent',
+};
