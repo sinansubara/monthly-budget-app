@@ -34,7 +34,7 @@ defineProps({
 
     // add border bottom only if card-header is not last element
     &:not(:last-child) {
-      border-bottom: 1px dotted $border-color;
+      border-bottom: 1px dotted $border-dotted-color;
     }
   }
 }

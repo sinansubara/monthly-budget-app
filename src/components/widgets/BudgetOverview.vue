@@ -97,7 +97,7 @@ const handleResetExpenses = () => {
     gap: 8px;
     width: 100%;
     padding-bottom: 24px;
-    border-bottom: 1px dotted $border-color;
+    border-bottom: 1px dotted $border-dotted-color;
 
     .money-amount {
       font-size: 18px;

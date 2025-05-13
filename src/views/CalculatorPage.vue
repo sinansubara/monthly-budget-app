@@ -53,7 +53,7 @@ const handleNewExpense = () => {
 
   .dashboard-header {
     padding-bottom: 24px;
-    border-bottom: 1px solid $border-color;
+    border-bottom: 1px solid $border-solid-color;
   }
 
   .circle-add-icon {
@@ -66,7 +66,7 @@ const handleNewExpense = () => {
 
   .goals-section {
     padding-top: 13px;
-    border-top: 1px dotted $border-color;
+    border-top: 1px dotted $border-dotted-color;
   }
 
   .card-section {
