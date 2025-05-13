@@ -43,6 +43,7 @@ const imageUrl = computed(() => {
   border-radius: 50%;
   border: 1px solid $image-border-color;
   background-color: $white-text;
+  flex-shrink: 0;
 
   img {
     width: 100%;
