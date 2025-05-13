@@ -2,7 +2,11 @@
   <div class="expenses-list">
     <div class="expenses-list-header">
       <span class="expenses-list-title">Expenses</span>
-      <FilterCategory />
+      <ListDropdown
+        v-model="selectedCategory"
+        :items="filterCategories"
+        :dropdown-label="'Filter Expenses'"
+      />
     </div>
     <div
       v-for="(expense, index) in expenses"
@@ -39,19 +43,46 @@
 </template>
 
 <script setup>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useExpenseStore } from '@/stores/useExpensesStore';
-import { ExpenseCategoryNames } from '@/constants/expenseCategories.js';
+import {
+  ExpenseCategory,
+  ExpenseCategoryNames,
+} from '@/constants/expenseCategories.js';
 import ImageCircle from '@/components/elements/ImageCircle.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
-import FilterCategory from '@/components/widgets/FilterCategory.vue';
+import ListDropdown from '@/components/elements/ListDropdown.vue';
 import convertToCurrency from '@/utilities/convertToCurrency.js';
 
+const DEFAULT_CATEGORY_ALL = {
+  id: 'All',
+  name: 'All',
+};
 const expenseStore = useExpenseStore();
 
 const expenses = computed(() => {
-  return expenseStore.expenses;
+  return expenseStore.expenses.filter((expense) => {
+    return (
+      selectedCategory.value.id === DEFAULT_CATEGORY_ALL.id ||
+      expense.category === selectedCategory.value.id
+    );
+  });
 });
+
+const categoriesMapped = computed(() => {
+  return Object.values(ExpenseCategory).map((value) => {
+    return {
+      id: value,
+      name: ExpenseCategoryNames[value],
+    };
+  });
+});
+const filterCategories = computed(() => [
+  DEFAULT_CATEGORY_ALL,
+  ...categoriesMapped.value,
+]);
+
+const selectedCategory = ref(DEFAULT_CATEGORY_ALL);
 
 const getCategoryName = (category) => {
   return ExpenseCategoryNames[category] ?? category;
