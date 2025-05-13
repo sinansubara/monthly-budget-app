@@ -1,6 +1,7 @@
 <template>
   <button
     class="button-custom-wrap box-shadow"
+    :class="buttonVariation"
     :disabled="props.disabled"
     @click="handleClick"
   >
@@ -23,6 +24,10 @@ const props = defineProps({
   disabled: {
     type: Boolean,
     default: false,
+  },
+  buttonVariation: {
+    type: String,
+    default: '',
   },
 });
 const emit = defineEmits(['click']);
@@ -54,6 +59,23 @@ const handleClick = () => {
     font-size: 14px;
     line-height: 20px;
     color: $black-text;
+  }
+
+  &.small-button {
+    background-color: $primary-color;
+    border-radius: 20px;
+    padding: 2px 12px;
+    font-weight: 700;
+
+    &:hover {
+      background-color: darken($primary-color, 5%);
+    }
+
+    .button-text {
+      font-size: 14px;
+      line-height: 100%;
+      color: $black-text;
+    }
   }
 }
 </style>
