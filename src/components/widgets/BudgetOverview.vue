@@ -47,9 +47,6 @@ const convertToNumber = (value) => {
 };
 
 const userIncome = computed(() => convertToNumber(userStore.getIncome));
-const userAvailable = computed(() =>
-  convertToNumber(userStore.getRemainingBudget),
-);
 const userSpent = computed(() => convertToNumber(userStore.getTotalExpenses));
 
 const userSpentPercentage = computed(() => {
