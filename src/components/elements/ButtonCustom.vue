@@ -51,10 +51,6 @@ const handleClick = () => {
   cursor: pointer;
   transition: background-color 0.3s ease;
 
-  &:hover {
-    background-color: darken($secondary-color, 5%);
-  }
-
   .button-text {
     font-size: 14px;
     line-height: 20px;
@@ -67,14 +63,21 @@ const handleClick = () => {
     padding: 2px 12px;
     font-weight: 700;
 
-    &:hover {
-      background-color: darken($primary-color, 5%);
-    }
-
     .button-text {
       font-size: 14px;
       line-height: 100%;
       color: $black-text;
+    }
+  }
+
+  @media only screen and (min-width: 600px) {
+    &:hover {
+      background-color: darken($secondary-color, 5%);
+    }
+    &.small-button {
+      &:hover {
+        background-color: darken($primary-color, 7%);
+      }
     }
   }
 }
