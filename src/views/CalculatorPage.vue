@@ -7,6 +7,14 @@
         <BudgetOverview />
       </template>
     </InfoCard>
+    <InfoCard title="Optionals">
+      <template #content>
+        <CardSection title="Choose any fix expenses">
+          <FixExpenses />
+        </CardSection>
+        <GoalsSection />
+      </template>
+    </InfoCard>
     <IconCustom
       name="icon-add"
       class="circle-add-icon box-shadow"
@@ -20,6 +28,9 @@ import DashboardHeader from '@/components/widgets/DashboardHeader.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import InfoCard from '@/components/widgets/InfoCard.vue';
 import BudgetOverview from '@/components/widgets/BudgetOverview.vue';
+import CardSection from '@/components/widgets/CardSection.vue';
+import FixExpenses from '@/components/widgets/FixExpenses.vue';
+import GoalsSection from '@/components/widgets/GoalsSection.vue';
 
 const handleNewExpense = () => {
   console.log('New expense modal should open');
@@ -48,6 +59,11 @@ const handleNewExpense = () => {
     bottom: 22px;
     right: 30px;
     border-radius: 50%;
+  }
+
+  .goals-section {
+    padding-top: 13px;
+    border-top: 1px dotted $border-color;
   }
 
   @media (min-width: 600px) {
