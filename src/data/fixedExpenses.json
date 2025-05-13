@@ -1,0 +1,7 @@
+[
+  { "name": "Netflix", "amount": 15.99, "logo": "netflix" },
+  { "name": "Spotify", "amount": 9.99, "logo": "spotify" },
+  { "name": "Amazon", "amount": 60, "logo": "amazon" },
+  { "name": "Google", "amount": 20, "logo": "google" },
+  { "name": "Facebook", "amount": 11.49, "logo": "facebook" }
+]
