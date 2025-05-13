@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { useUserStore } from '@/stores/useUserStore';
+import { ExpenseCategory } from '@/constants/expenseCategories';
 
 export const useExpenseStore = defineStore('expenses', {
   state: () => {
@@ -21,7 +22,14 @@ export const useExpenseStore = defineStore('expenses', {
   actions: {
     addExpense(expense) {
       const userStore = useUserStore();
-      const newExpense = { id: Date.now().toString(), ...expense };
+      const currentDate = Date.now();
+      const defaultCategory = ExpenseCategory.SUBSCRIPTION;
+      const newExpense = {
+        id: currentDate.toString(),
+        date: currentDate,
+        category: defaultCategory,
+        ...expense,
+      };
       userStore.addExpense(newExpense); // Call addExpense action in userStore
     },
 
