@@ -12,6 +12,8 @@
       v-for="(expense, index) in expenses"
       :key="index"
       :expense="expense"
+      @remove-expense="handleRemoveExpense"
+      @edit-expense="handleEditExpense"
     />
     <div
       v-if="noExpenses"

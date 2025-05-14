@@ -1,5 +1,10 @@
 <template>
-  <div class="expense-item">
+  <div
+    v-if="!actionsVisible"
+    v-bind="$attrs"
+    class="expense-item"
+    @click="handleItemClick"
+  >
     <div class="expense-item-wrap">
       <ImageCircle
         v-if="expense.logo"
@@ -26,6 +31,35 @@
       }}</span>
     </div>
   </div>
+  <div
+    v-else
+    v-bind="$attrs"
+    class="expense-item expense-item-actions"
+    @click="closeActions"
+  >
+    <div class="actions-buttons-wrap">
+      <div
+        class="action-button"
+        @click.stop="handleEditExpense"
+      >
+        <IconCustom
+          name="edit"
+          class="action-icon accent-text-color"
+        />
+        <span class="action-text accent-text-color">Edit</span>
+      </div>
+      <div
+        class="action-button"
+        @click.stop="handleRemoveExpense"
+      >
+        <IconCustom
+          name="delete"
+          class="action-icon error-text-color"
+        />
+        <span class="action-text error-text-color">Delete</span>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
@@ -33,6 +67,7 @@ import ImageCircle from '@/components/elements/ImageCircle.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import { ExpenseCategoryNames } from '@/constants/expenseCategories.js';
 import convertToCurrency from '@/utilities/convertToCurrency.js';
+import { ref } from 'vue';
 
 const props = defineProps({
   expense: {
@@ -40,6 +75,10 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(['remove-expense', 'edit-expense']);
+
+const actionsVisible = ref(false);
 
 const getCategoryName = (category) => {
   return ExpenseCategoryNames[category] ?? category;
@@ -52,6 +91,26 @@ const formatDate = (date) => {
   const day = String(dateObj.getDate()).padStart(2, '0');
   const year = dateObj.getFullYear();
   return `${month}, ${day}-${year}`;
+};
+
+const toggleActions = () => {
+  actionsVisible.value = !actionsVisible.value;
+};
+
+const closeActions = () => {
+  actionsVisible.value = false;
+};
+
+const handleItemClick = () => {
+  toggleActions();
+};
+
+const handleRemoveExpense = () => {
+  emit('remove-expense', props.expense);
+};
+
+const handleEditExpense = () => {
+  emit('edit-expense', props.expense);
 };
 </script>
 
@@ -109,6 +168,34 @@ const formatDate = (date) => {
       font-size: 30px;
       line-height: 100%;
       margin-left: auto;
+    }
+  }
+
+  &.expense-item-actions {
+    display: flex;
+    justify-content: center;
+    background-color: $box-background;
+
+    .actions-buttons-wrap {
+      display: flex;
+      gap: 24px;
+      // gap: 55px; // for bigger screen
+
+      .action-button {
+        display: flex;
+        gap: 2px;
+        padding: 4px 8px;
+
+        .action-icon {
+          width: 24px;
+          height: 24px;
+        }
+
+        .action-text {
+          font-size: 18px;
+          text-transform: capitalize;
+        }
+      }
     }
   }
 }
