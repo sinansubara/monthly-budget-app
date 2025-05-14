@@ -125,6 +125,7 @@ import ExpenseIcon from '@/components/elements/ExpenseIcon.vue';
 import InputPreview from '@/components/elements/InputPreview.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
+import DatePicker from '@/components/elements/DatePicker.vue';
 
 const modalStore = useModalStore(); // Access Pinia store
 const expenseStore = useExpenseStore(); // Access expense store
