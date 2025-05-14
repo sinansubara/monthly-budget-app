@@ -60,18 +60,23 @@
 
       <!-- Date Input -->
       <div class="input-group">
-        <input
-          v-model="expenseData.date"
-          type="date"
-          :class="{ 'input-error': errors.date }"
-          :min="startOfMonth"
-          :max="endOfMonth"
-        />
-        <span
-          v-if="errors.date"
-          class="error-message"
-          >Please select a valid date</span
+        <DatePicker
+          :min-date="startOfMonth"
+          :max-date="endOfMonth"
+          @date-change="expenseData.date = $event"
         >
+          <InputPreview
+            placeholder="Date"
+            class="base-overlay"
+            :class="{ 'input-error': errors.date }"
+          >
+            <span
+              v-if="isDateSet"
+              class="selected-formatted-date"
+              >{{ formattedDate }}</span
+            >
+          </InputPreview>
+        </DatePicker>
       </div>
 
       <!-- Amount Input -->
@@ -160,6 +165,19 @@ const categoryIcon = computed(() => {
     ExpenseCategoryIcons[expenseData.value.category] ??
     ExpenseCategoryIcons[ExpenseCategory.SUBSCRIPTION]
   );
+});
+
+const isDateSet = computed(() => {
+  return !!expenseData.value.date;
+});
+
+// Date format: 23/2/2024
+const formattedDate = computed(() => {
+  if (!expenseData.value.date) return 'Date';
+  const d = new Date(expenseData.value.date);
+  return `${String(d.getDate()).padStart(2, '0')}/${String(
+    d.getMonth() + 1,
+  ).padStart(2, '0')}/${d.getFullYear()}`;
 });
 
 const errors = ref({
