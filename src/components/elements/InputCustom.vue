@@ -8,6 +8,7 @@
     v-bind="numberInputAttrs"
     spellcheck="false"
     @input="handleInput"
+    @blur="handleBlur"
   />
 </template>
 
@@ -36,7 +37,7 @@ const props = defineProps({
   },
 });
 
-const emit = defineEmits(['input']);
+const emit = defineEmits(['input', 'blur']);
 
 const inputRef = ref(null);
 
@@ -64,6 +65,10 @@ const handleInput = (event) => {
   inputRef.value.reportValidity();
   const value = event.target.value;
   inputValue.value = value;
+};
+
+const handleBlur = (event) => {
+  emit('blur', event, event.target.value);
 };
 </script>
 
