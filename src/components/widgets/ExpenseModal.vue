@@ -33,12 +33,11 @@
           v-model="selectedCategory"
           :items="categoriesMapped"
           :dropdown-label="'Filter Expenses'"
-          :class="{ 'input-error': errors.category }"
         >
           <template #customTrigger="{ toggle, isOpen }">
             <InputPreview
               placeholder="Category"
-              :class="{ focused: isOpen }"
+              :class="{ focused: isOpen, 'input-error': errors.category }"
               @click="toggle"
             >
               <div
