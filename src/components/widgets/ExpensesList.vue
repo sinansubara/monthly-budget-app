@@ -178,9 +178,11 @@ const noExpensesForCategory = computed(() => {
       color: $light-text;
       width: 100%;
 
-      .image-circle {
+      .image-circle,
+      .expense-icon {
         width: 40px;
         height: 40px;
+        flex-shrink: 0;
       }
 
       .expense-details {
