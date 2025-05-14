@@ -56,6 +56,16 @@
         class="no-expenses-icon"
       />
     </div>
+    <div
+      v-if="noExpensesForCategory"
+      class="no-expenses-wrap"
+    >
+      <div class="no-expenses-text">
+        No expenses found for
+        <span class="accent-text-color"> "{{ selectedCategory.name }}" </span>
+        category
+      </div>
+    </div>
   </div>
 </template>
 
@@ -77,8 +87,12 @@ const DEFAULT_CATEGORY_ALL = {
 };
 const expenseStore = useExpenseStore();
 
+const storeExpenses = computed(() => {
+  return expenseStore.expenses;
+});
+
 const expenses = computed(() => {
-  return expenseStore.expenses.filter((expense) => {
+  return storeExpenses.value.filter((expense) => {
     return (
       selectedCategory.value.id === DEFAULT_CATEGORY_ALL.id ||
       expense.category === selectedCategory.value.id
@@ -115,7 +129,11 @@ const formatDate = (date) => {
 };
 
 const noExpenses = computed(() => {
-  return expenses.value.length === 0;
+  return storeExpenses.value.length === 0;
+});
+
+const noExpensesForCategory = computed(() => {
+  return !noExpenses.value && expenses.value.length === 0;
 });
 </script>
 
