@@ -345,19 +345,6 @@ $closeButtonSize: 48px;
   background-color: $dark-background;
   padding: 27px;
 
-  .error-message {
-    position: absolute;
-    top: 100%;
-    color: $error-color;
-    font-size: 0.875rem;
-
-    &.budget-exceeded {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 20px;
-    }
-  }
-
   /* for bigger screens */
   // background-color: rgba(0, 0, 0, 0.9);
   .modal-container {
