@@ -28,5 +28,9 @@ export const useModalStore = defineStore('modal', {
       this.modalMode = 'new'; // Reset to 'new' when closing the modal
       this.expenseData = {}; // Clear the data when closing
     },
+
+    updateDataProperty(property, value) {
+      this.expenseData[property] = value;
+    },
   },
 });
