@@ -1,12 +1,17 @@
 import { defineStore } from 'pinia';
 import { useUserStore } from '@/stores/useUserStore';
 import { ExpenseCategory } from '@/constants/expenseCategories';
+import { computed } from 'vue';
 
 export const useExpenseStore = defineStore('expenses', {
   state: () => {
     const userStore = useUserStore();
+
+    const expenses = computed(() => {
+      return userStore.user.expenses || [];
+    });
     return {
-      expenses: userStore.user.expenses, // Get expenses directly from userStore
+      expenses,
     };
   },
 
@@ -35,22 +40,27 @@ export const useExpenseStore = defineStore('expenses', {
 
     updateExpense(expenseId, updatedData) {
       const userStore = useUserStore();
-      const index = this.expenses.findIndex((e) => e.id === expenseId);
+      const index = this.expenses.value.findIndex((e) => e.id === expenseId);
       if (index !== -1) {
-        this.expenses[index] = { ...this.expenses[index], ...updatedData };
+        this.expenses.value[index] = {
+          ...this.expenses.value[index],
+          ...updatedData,
+        };
         userStore.updateExpense(expenseId, updatedData); // Call updateExpense action in userStore
       }
     },
 
     removeExpense(expenseId) {
       const userStore = useUserStore();
-      this.expenses = this.expenses.filter((e) => e.id !== expenseId);
+      this.expenses.value = this.expenses.value.filter(
+        (e) => e.id !== expenseId,
+      );
       userStore.removeExpense(expenseId); // Call removeExpense action in userStore
     },
 
     resetExpenses() {
       const userStore = useUserStore();
-      this.expenses = [];
+      this.expenses.value = [];
       userStore.setExpenses([]);
     },
   },
