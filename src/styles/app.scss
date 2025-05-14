@@ -89,11 +89,11 @@ body {
   }
 
   &:focus {
-    border-color: $primary-color;
+    border-color: $primary-color !important;
   }
 
   &.focused {
-    border-color: $primary-color;
+    border-color: $primary-color !important;
   }
 }
 
