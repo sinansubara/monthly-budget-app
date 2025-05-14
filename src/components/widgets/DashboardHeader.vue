@@ -35,13 +35,15 @@
 import IconCustom from '@/components/elements/IconCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { useUserStore } from '@/stores/useUserStore';
+import { useModalStore } from '@/stores/useModalStore';
 import { computed } from 'vue';
 
 const userStore = useUserStore();
+const modalStore = useModalStore();
 const userName = computed(() => userStore.getName);
 
 const handleNewExpense = () => {
-  console.log('New expense modal should open');
+  modalStore.openModal();
 };
 </script>
 

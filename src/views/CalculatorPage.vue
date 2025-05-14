@@ -43,7 +43,6 @@ import { useModalStore } from '@/stores/useModalStore';
 const modalStore = useModalStore();
 
 const handleNewExpense = () => {
-  console.log('New expense modal should open');
   modalStore.openModal();
 };
 </script>
