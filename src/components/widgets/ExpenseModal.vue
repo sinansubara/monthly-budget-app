@@ -15,7 +15,7 @@
         <InputCustom
           :value="expenseData.name"
           type="text"
-          placeholder="Enter expense name"
+          placeholder="Name"
           :class="{ 'input-error': errors.name }"
           @input="expenseData.name = $event"
           @blur="handleInputBlur"
