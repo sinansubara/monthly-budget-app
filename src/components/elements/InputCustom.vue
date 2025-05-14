@@ -71,27 +71,3 @@ const handleBlur = (event) => {
   emit('blur', event, event.target.value);
 };
 </script>
-
-<style lang="scss">
-.input-custom {
-  width: 100%;
-  padding: 0 16px 16px;
-  background-color: transparent;
-  border: none;
-  border-bottom: 1px solid $input-border-color;
-  color: $placeholder-color;
-  font-size: 20px;
-  line-height: 28px;
-  letter-spacing: 0.1em;
-  text-align: center;
-  outline: none;
-
-  &::placeholder {
-    color: $placeholder-color;
-  }
-
-  &:focus {
-    border-color: $primary-color;
-  }
-}
-</style>
