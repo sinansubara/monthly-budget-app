@@ -65,6 +65,8 @@
           v-model="expenseData.amount"
           type="number"
           placeholder="Enter amount"
+          min="0.01"
+          step="0.01"
           :class="{ 'input-error': errors.amount }"
         />
         <span
