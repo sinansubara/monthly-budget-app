@@ -31,11 +31,19 @@ export const useUserStore = defineStore('user', {
         0,
       );
     },
+    /**
+     * Calculates the remaining budget after deducting total expenses.
+     * @returns {number} The remaining budget.
+     */
     getRemainingBudget: (state) => {
       const income = parseFloat(state.user.income) || 0;
       const totalExpenses = state.getTotalExpenses;
       return income - totalExpenses;
     },
+    /**
+     * Calculates the remaining budget after deducting goals.
+     * @returns {number} The remaining budget after deducting goals.
+     */
     getRemainingBudgetDeductingGoals: (state) => {
       const remainingBudget = state.getRemainingBudget;
       const goals = parseFloat(state.user.goals) || 0;
