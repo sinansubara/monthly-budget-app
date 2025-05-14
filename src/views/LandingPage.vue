@@ -33,9 +33,13 @@
         </div>
         <ButtonCustom
           :button-text="'Start Your Calculation'"
-          :disabled="!isFormValid"
           @click="handleCalculation"
         />
+        <span
+          v-if="isGoalLargerThanIncome && showErrorMessage"
+          class="error-message landing-error-message"
+          >{{ randomErrorMessage }}</span
+        >
       </div>
     </div>
   </div>
@@ -43,7 +47,7 @@
 
 <script setup>
 // Detect if the screen is in desktop view using a computed property
-import { ref, onMounted, reactive, computed, onUnmounted } from 'vue';
+import { ref, onMounted, reactive, computed, onUnmounted, watch } from 'vue';
 import InputCustom from '@/components/elements/InputCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { setUserData } from '@/utilities/localStorageUtils';
@@ -53,7 +57,29 @@ import { useUserStore } from '@/stores/useUserStore';
 const router = useRouter();
 const userStore = useUserStore();
 
+const funnyErrorMessages = [
+  "Whoa! Goal's above your income — try shrinking it.",
+  "Too ambitious! Goal's bigger than your income.",
+  "Nice try, but your income can't keep up!",
+  "Slow down, your income's not that strong.",
+  'Oops! Your goal went a bit overboard.',
+  'Your wallet says “nope” to that goal.',
+  'Goal > Income? Math says try again.',
+  "Your goal's flexing too hard — dial it back!",
+  "That's a bold goal. Income disagrees.",
+  'Aim high, but not that high!',
+  'Your goal just outgrew your budget.',
+];
+
+const randomErrorMessage = ref(funnyErrorMessages[0]);
+
+const setRandomErrorMessage = () => {
+  randomErrorMessage.value =
+    funnyErrorMessages[Math.floor(Math.random() * funnyErrorMessages.length)];
+};
+
 const isDesktop = ref(true);
+const showErrorMessage = ref(false);
 
 const formData = reactive([
   {
@@ -77,6 +103,14 @@ const formData = reactive([
     minNumber: 0,
   },
 ]);
+
+const isGoalLargerThanIncome = computed(() => {
+  const income = formData.find((i) => i.id === 'income');
+  const incomeValue = parseFloat(income.value);
+  const goals = formData.find((i) => i.id === 'goals');
+  const goalsValue = parseFloat(goals.value);
+  return goalsValue > incomeValue;
+});
 
 const isFormValid = computed(() => {
   return formData.every((item) => {
@@ -114,13 +148,25 @@ const checkScreenSize = () => {
 };
 
 const handleCalculation = () => {
-  if (!isFormValid.value) return;
+  if (!isFormValid.value) {
+    if (isGoalLargerThanIncome.value) {
+      showErrorMessage.value = true;
+      setRandomErrorMessage();
+    }
+    return;
+  }
   userStore.login(currentUserMapData.value);
   // set user data to local storage
   setUserData(currentUserMapData.value);
   // navigate to the next page
   router.push({ name: 'calculator' });
 };
+
+watch(isGoalLargerThanIncome, (newValue) => {
+  if (!newValue) {
+    showErrorMessage.value = false;
+  }
+});
 
 onMounted(() => {
   checkScreenSize();
