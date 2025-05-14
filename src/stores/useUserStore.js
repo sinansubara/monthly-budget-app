@@ -109,10 +109,33 @@ export const useUserStore = defineStore('user', {
       this.clearUserData(); // Clear user data and log out
     },
 
+    wouldExceedBudget(amount, existingExpenseId = null) {
+      const availableBudget = this.getInitialBudget;
+
+      // If updating an existing expense, subtract its current amount from the total
+      let adjustedTotal = this.getTotalExpenses;
+      if (existingExpenseId) {
+        const existingExpense = this.user.expenses.find(
+          (e) => e.id === existingExpenseId,
+        );
+        if (existingExpense) {
+          adjustedTotal -= parseFloat(existingExpense.amount) || 0;
+        }
+      }
+
+      // Check if new total would exceed available budget
+      return adjustedTotal + parseFloat(amount) > availableBudget;
+    },
+
     // Expense-related actions
     addExpense(expense) {
+      if (this.wouldExceedBudget(expense.amount)) {
+        console.warn('Adding this expense would exceed your available budget');
+        return { success: false, error: 'Expense exceeds available budget' };
+      }
       this.user.expenses.push(expense);
       setUserData(this.user); // Update user data in localStorage
+      return { success: true };
     },
 
     updateExpense(expenseId, updatedData) {
