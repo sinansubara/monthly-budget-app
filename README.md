@@ -1,5 +1,7 @@
 # Monthly Budget App
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/214b6315-30b2-4116-8f52-4139ac990b09/deploy-status)](https://app.netlify.com/projects/savingcalculation/deploys)
+
 This is a **Monthly Budget App** built using **Vue 3** and **Vite**. The purpose of this app is to help users track their income, expenses, and set financial goals. It includes features like expense tracking, income calculation, goal setting, and predefined fixed expenses.
 
 ### 1. Clone the repository
