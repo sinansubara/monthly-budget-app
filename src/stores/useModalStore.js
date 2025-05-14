@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia';
-import { ExpenseCategory } from '@/constants/expenseCategories.js';
 
 export const useModalStore = defineStore('modal', {
   state: () => ({
@@ -11,10 +10,7 @@ export const useModalStore = defineStore('modal', {
   actions: {
     // Show the modal with an optional mode ('new' or 'edit') and data for editing
     // Add "category" property as default value if not provided
-    openModal(
-      mode = 'new',
-      data = { category: Object.values(ExpenseCategory)[0] },
-    ) {
+    openModal(mode = 'new', data = {}) {
       const validModes = ['new', 'edit'];
       if (!validModes.includes(mode)) return;
       this.isModalVisible = true;
