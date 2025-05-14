@@ -147,7 +147,15 @@ const DEFAULT_CATEGORY = {
   id: UNSELECTED_CATEGORY_ID,
   name: 'Category',
 };
-const selectedCategory = ref(DEFAULT_CATEGORY);
+
+const storedCategory = computed(() => {
+  return (
+    ListExpenseCategories.find(
+      (category) => category.id === expenseData.value.category,
+    ) ?? DEFAULT_CATEGORY
+  );
+});
+const selectedCategory = ref(storedCategory.value);
 const categoriesMapped = computed(() => {
   return ListExpenseCategories;
 });
@@ -158,6 +166,12 @@ watch(selectedCategory, (newCategory) => {
   }
   expenseData.value.category = newCategory.id;
   handleInputBlur();
+});
+
+watch(storedCategory, (newVal) => {
+  if (newVal) {
+    selectedCategory.value = newVal;
+  }
 });
 
 const isCategorySelected = computed(() => {
