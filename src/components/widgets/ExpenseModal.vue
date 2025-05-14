@@ -35,9 +35,10 @@
           :dropdown-label="'Filter Expenses'"
           :class="{ 'input-error': errors.category }"
         >
-          <template #customTrigger="{ toggle }">
+          <template #customTrigger="{ toggle, isOpen }">
             <InputPreview
               placeholder="Category"
+              :class="{ focused: isOpen }"
               @click="toggle"
             >
               <div
