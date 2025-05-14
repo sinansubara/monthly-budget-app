@@ -89,10 +89,12 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useModalStore } from '@/stores/useModalStore'; // Import Pinia store
+import { useExpenseStore } from '@/stores/useExpensesStore';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 
 const modalStore = useModalStore(); // Access Pinia store
+const expenseStore = useExpenseStore(); // Access expense store
 
 // Modal state from store
 const isModalVisible = computed(() => modalStore.isModalVisible); // Bind to modal visibility
@@ -136,8 +138,7 @@ const validateForm = () => {
 // Function to submit the expense data
 const submitExpense = () => {
   if (validateForm()) {
-    // Logic to handle form submission (save or update expense)
-    console.log('Expense Data submitted:', expenseData.value);
+    expenseStore.addExpense(expenseData.value);
     closeModal();
   }
 };
