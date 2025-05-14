@@ -55,15 +55,11 @@ export const useExpenseStore = defineStore('expenses', {
 
     removeExpense(expenseId) {
       const userStore = useUserStore();
-      this.expenses.value = this.expenses.value.filter(
-        (e) => e.id !== expenseId,
-      );
       userStore.removeExpense(expenseId); // Call removeExpense action in userStore
     },
 
     resetExpenses() {
       const userStore = useUserStore();
-      this.expenses.value = [];
       userStore.setExpenses([]);
     },
   },
