@@ -2,6 +2,7 @@
   <div class="dropdown-container">
     <!-- Dropdown Button -->
     <ButtonCustom
+      ref="dropdownButton"
       class="dropdown-button"
       @click="toggleDropdown"
     >
@@ -27,7 +28,9 @@
     <!-- Dropdown Menu -->
     <div
       v-if="isDropdownOpen"
+      ref="dropdownMenu"
       class="dropdown-menu box-shadow"
+      :class="{ 'dropdown-menu-top': showAbove }"
     >
       <ul>
         <li
@@ -43,7 +46,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, nextTick, watch, onUnmounted } from 'vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 
@@ -70,11 +73,34 @@ const emit = defineEmits(['update:modelValue']);
 // Reactive state
 const isDropdownOpen = ref(false); // Track dropdown open/close state
 const selectedOption = ref(props.modelValue); // Default selected option
+const dropdownButton = ref(null); // Reference to dropdown button
+const dropdownMenu = ref(null); // Reference to dropdown menu
+const showAbove = ref(false); // Whether to show dropdown above the button
 
 // Toggle the dropdown open/close state
 const toggleDropdown = () => {
   isDropdownOpen.value = !isDropdownOpen.value;
+
+  if (isDropdownOpen.value) {
+    nextTick(() => {
+      positionDropdown();
+    });
+  }
 };
+function positionDropdown() {
+  const dropdownRect = dropdownMenu.value.getBoundingClientRect();
+  const triggerRect = dropdownButton.value.$el.getBoundingClientRect();
+
+  const spaceBelow = window.innerHeight - triggerRect.bottom;
+  const spaceAbove = triggerRect.top;
+
+  // Check if there's enough space below, else show above
+  if (spaceBelow < dropdownRect.height && spaceAbove > dropdownRect.height) {
+    showAbove.value = true;
+  } else {
+    showAbove.value = false;
+  }
+}
 
 // Select a new option and close the dropdown
 const selectOption = (option) => {
@@ -83,6 +109,29 @@ const selectOption = (option) => {
 
   emit('update:modelValue', option); // Emit the selected item
 };
+
+const registerEvents = () => {
+  window.addEventListener('resize', positionDropdown);
+  window.addEventListener('scroll', positionDropdown);
+};
+const unregisterEvents = () => {
+  window.removeEventListener('resize', positionDropdown);
+  window.removeEventListener('scroll', positionDropdown);
+};
+
+// Watch for window resize to reposition dropdown
+watch(isDropdownOpen, (newValue) => {
+  if (newValue) {
+    registerEvents();
+  } else {
+    unregisterEvents();
+  }
+});
+
+// Cleanup event listeners on component unmount
+onUnmounted(() => {
+  unregisterEvents();
+});
 </script>
 
 <style scoped lang="scss">
@@ -154,6 +203,13 @@ const selectOption = (option) => {
     overflow-y: auto;
     margin-top: 5px;
     color: $white-text;
+
+    &.dropdown-menu-top {
+      top: auto;
+      bottom: 100%;
+      margin-top: 0;
+      margin-bottom: 5px;
+    }
 
     ul {
       list-style: none;
