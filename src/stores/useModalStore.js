@@ -10,6 +10,8 @@ export const useModalStore = defineStore('modal', {
   actions: {
     // Show the modal with an optional mode ('new' or 'edit') and data for editing
     openModal(mode = 'new', data = {}) {
+      const validModes = ['new', 'edit'];
+      if (!validModes.includes(mode)) return;
       this.isModalVisible = true;
       this.modalMode = mode;
       this.expenseData = { ...data }; // Pre-fill with data for editing
