@@ -77,6 +77,11 @@
             >
           </InputPreview>
         </DatePicker>
+        <span
+          v-if="errors.date"
+          class="error-message"
+          >Please select a valid date</span
+        >
       </div>
 
       <!-- Amount Input -->
