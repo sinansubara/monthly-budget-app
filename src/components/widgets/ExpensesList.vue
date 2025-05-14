@@ -1,7 +1,7 @@
 <template>
   <div class="expenses-list">
     <div class="expenses-list-header">
-      <span class="expenses-list-title">Expenses</span>
+      <span class="expenses-list-title">Description</span>
       <ListDropdown
         v-model="selectedCategory"
         :items="filterCategories"
