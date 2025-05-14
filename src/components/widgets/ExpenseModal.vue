@@ -176,9 +176,7 @@ const isDateSet = computed(() => {
 const formattedDate = computed(() => {
   if (!expenseData.value.date) return 'Date';
   const d = new Date(expenseData.value.date);
-  return `${String(d.getDate()).padStart(2, '0')}/${String(
-    d.getMonth() + 1,
-  ).padStart(2, '0')}/${d.getFullYear()}`;
+  return `${d.getDate()}/${d.getMonth() + 1}/${d.getFullYear()}`;
 });
 
 const errors = ref({
