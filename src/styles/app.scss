@@ -108,6 +108,15 @@ body {
       margin-top: 10px;
       font-size: 20px;
     }
+
+    &.landing-error-message {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+      font-size: 20px;
+      top: unset;
+      position: relative;
+    }
   }
 
 /* Chrome, Safari, Edge, Opera */
