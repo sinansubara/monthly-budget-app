@@ -161,6 +161,13 @@ const convertToDate = (date) => {
 };
 
 const closeModal = () => {
+  // clear the errors
+  errors.value = {
+    name: false,
+    category: false,
+    date: false,
+    amount: false,
+  };
   modalStore.closeModal();
 };
 
