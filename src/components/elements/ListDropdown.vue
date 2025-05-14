@@ -1,7 +1,21 @@
 <template>
   <div class="dropdown-container">
-    <!-- Dropdown Button -->
+    <!-- Default Button or Custom Slot -->
+    <template v-if="$slots.customTrigger">
+      <div
+        ref="dropdownButton"
+        class="custom-trigger"
+      >
+        <slot
+          name="customTrigger"
+          :toggle="toggleDropdown"
+          :is-open="isDropdownOpen"
+          :selected="selectedOption"
+        ></slot>
+      </div>
+    </template>
     <ButtonCustom
+      v-else
       ref="dropdownButton"
       class="dropdown-button"
       @click="toggleDropdown"
@@ -46,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onUnmounted } from 'vue';
+import { ref, nextTick, watch, onUnmounted, defineExpose } from 'vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 
@@ -93,11 +107,13 @@ const toggleDropdown = () => {
 
 // Handle clicks outside the dropdown
 const handleOutsideClick = (event) => {
+  const dropdownElement = dropdownMenu.value;
+  const triggerElement = dropdownButton.value.$el ?? dropdownButton.value;
   if (
-    dropdownMenu.value &&
-    !dropdownMenu.value.contains(event.target) &&
-    dropdownButton.value &&
-    !dropdownButton.value.$el.contains(event.target)
+    dropdownElement &&
+    !dropdownElement.contains(event.target) &&
+    triggerElement &&
+    !triggerElement.contains(event.target)
   ) {
     isDropdownOpen.value = false;
   }
@@ -105,7 +121,11 @@ const handleOutsideClick = (event) => {
 
 function positionDropdown() {
   const dropdownRect = dropdownMenu.value.getBoundingClientRect();
-  const triggerRect = dropdownButton.value.$el.getBoundingClientRect();
+
+  const triggerElement = dropdownButton.value.$el ?? dropdownButton.value;
+  const triggerRect =
+    triggerElement.getBoundingClientRect() ??
+    dropdownButton.value.getBoundingClientRect();
 
   const spaceBelow = window.innerHeight - triggerRect.bottom;
   const spaceAbove = triggerRect.top;
@@ -172,6 +192,11 @@ defineExpose({
   position: relative;
   display: flex;
   min-width: 0px;
+
+  .custom-trigger {
+    width: 100%;
+    cursor: pointer;
+  }
 
   .dropdown-button {
     background-color: transparent;
