@@ -49,6 +49,8 @@
           v-model="expenseData.date"
           type="date"
           :class="{ 'input-error': errors.date }"
+          :min="startOfMonth"
+          :max="endOfMonth"
         />
         <span
           v-if="errors.date"
@@ -114,6 +116,29 @@ const errors = ref({
 });
 
 const isDesktop = ref(true);
+
+const startOfMonth = computed(() => {
+  const date = new Date();
+  date.setDate(1);
+  date.setHours(0, 0, 0, 0);
+  return convertToDate(date);
+});
+const endOfMonth = computed(() => {
+  const date = new Date();
+  date.setMonth(date.getMonth() + 1);
+  date.setDate(0);
+  date.setHours(23, 59, 59, 999);
+  return convertToDate(date);
+});
+
+// Format: yyyy-mm-dd
+const convertToDate = (date) => {
+  const dateObj = date instanceof Date ? date : new Date(date);
+  const year = dateObj.getFullYear();
+  const month = String(dateObj.getMonth() + 1).padStart(2, '0');
+  const day = String(dateObj.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 const closeModal = () => {
   modalStore.closeModal();
