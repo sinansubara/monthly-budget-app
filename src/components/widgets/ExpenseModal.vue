@@ -155,7 +155,7 @@ const validateForm = () => {
     name: !expenseData.value.name,
     category: !expenseData.value.category,
     date: !expenseData.value.date,
-    amount: expenseData.value.amount <= 0,
+    amount: !expenseData.value.amount || Number(expenseData.value.amount) <= 0,
   };
   return !Object.values(errors.value).includes(true); // Return true if no errors
 };
