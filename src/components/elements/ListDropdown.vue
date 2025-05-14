@@ -110,11 +110,11 @@ const selectOption = (option) => {
   emit('update:modelValue', option); // Emit the selected item
 };
 
-const registerEvents = () => {
+const registerPositionEvents = () => {
   window.addEventListener('resize', positionDropdown);
   window.addEventListener('scroll', positionDropdown);
 };
-const unregisterEvents = () => {
+const unregisterPositionEvents = () => {
   window.removeEventListener('resize', positionDropdown);
   window.removeEventListener('scroll', positionDropdown);
 };
@@ -122,15 +122,15 @@ const unregisterEvents = () => {
 // Watch for window resize to reposition dropdown
 watch(isDropdownOpen, (newValue) => {
   if (newValue) {
-    registerEvents();
+    registerPositionEvents();
   } else {
-    unregisterEvents();
+    unregisterPositionEvents();
   }
 });
 
 // Cleanup event listeners on component unmount
 onUnmounted(() => {
-  unregisterEvents();
+  unregisterPositionEvents();
 });
 </script>
 
