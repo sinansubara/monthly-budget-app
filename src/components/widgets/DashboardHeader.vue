@@ -12,11 +12,20 @@
           <span class="accent-text-color">Budget</span>
         </div>
       </div>
-      <ButtonCustom
-        class="new-expense-button"
-        :button-text="'New Expense'"
-        @click="handleNewExpense"
-      />
+      <div class="header-right-wrap">
+        <ButtonCustom
+          class="new-expense-button"
+          :button-text="'New Expense'"
+          @click="handleNewExpense"
+        />
+        <div class="right-user-info">
+          <IconCustom
+            name="user"
+            class="user-icon"
+          />
+          <span class="user-name"> Welcome, {{ userName }}</span>
+        </div>
+      </div>
     </div>
     <span class="header-welcome-text"> Welcome, {{ userName }}! </span>
   </div>
@@ -73,8 +82,12 @@ const handleNewExpense = () => {
       }
     }
 
-    .new-expense-button {
+    .header-right-wrap {
       display: none;
+
+      .right-user-info {
+        display: none;
+      }
     }
   }
 
