@@ -12,11 +12,13 @@
 
       <!-- Name Input -->
       <div class="input-group">
-        <input
-          v-model="expenseData.name"
+        <InputCustom
+          :value="expenseData.name"
           type="text"
           placeholder="Enter expense name"
           :class="{ 'input-error': errors.name }"
+          @input="expenseData.name = $event"
+          @blur="handleInputBlur"
         />
         <span
           v-if="errors.name"
@@ -94,6 +96,7 @@
 import { ref, computed, onMounted, onUnmounted } from 'vue';
 import { useModalStore } from '@/stores/useModalStore'; // Import Pinia store
 import { useExpenseStore } from '@/stores/useExpensesStore';
+import InputCustom from '@/components/elements/InputCustom.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 
@@ -233,6 +236,9 @@ $closeButtonSize: 48px;
 
     .input-group {
       width: 100%;
+      position: relative;
+      display: flex;
+      justify-content: center;
 
       &:not(:last-of-type) {
         margin-bottom: 48px;
@@ -248,21 +254,14 @@ $closeButtonSize: 48px;
         font-size: 1rem;
       }
 
-      input,
-      select {
-        width: 100%;
-        padding: 8px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
-        font-size: 1rem;
-      }
-
       .input-error {
-        border-color: red;
+        border-color: $error-color;
       }
 
       .error-message {
-        color: red;
+        position: absolute;
+        top: 100%;
+        color: $error-color;
         font-size: 0.875rem;
       }
     }
