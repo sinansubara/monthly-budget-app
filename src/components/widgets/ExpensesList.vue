@@ -9,8 +9,8 @@
       />
     </div>
     <ExpenseItem
-      v-for="(expense, index) in expenses"
-      :key="index"
+      v-for="expense in expenses"
+      :key="expense.id"
       :expense="expense"
       @remove-expense="handleRemoveExpense"
       @edit-expense="handleEditExpense"
