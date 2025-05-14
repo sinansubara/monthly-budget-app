@@ -63,7 +63,7 @@
         <DatePicker
           :min-date="startOfMonth"
           :max-date="endOfMonth"
-          @date-change="expenseData.date = $event"
+          @date-change="handleDateChange"
         >
           <InputPreview
             placeholder="Date"
@@ -241,6 +241,11 @@ const convertToDate = (date) => {
   const month = String(dateObj.getMonth() + 1).padStart(2, '0');
   const day = String(dateObj.getDate()).padStart(2, '0');
   return `${year}-${month}-${day}`;
+};
+
+const handleDateChange = ($event) => {
+  expenseData.value.date = $event;
+  handleInputBlur();
 };
 
 const closeModal = () => {
