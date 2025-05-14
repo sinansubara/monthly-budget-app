@@ -39,6 +39,23 @@
         }}</span>
       </div>
     </div>
+    <div
+      v-if="noExpenses"
+      class="no-expenses-wrap"
+    >
+      <div class="no-expenses-text">
+        Looks like you haven't added any
+        <span class="accent-text-color">expenses yet.</span>
+      </div>
+      <div class="no-expenses-subtext">
+        No worries, just hit the
+        <span class="accent-text-color">'Add'</span> button to get started
+      </div>
+      <IconCustom
+        name="cart"
+        class="no-expenses-icon"
+      />
+    </div>
   </div>
 </template>
 
@@ -96,6 +113,10 @@ const formatDate = (date) => {
   const year = dateObj.getFullYear();
   return `${month}, ${day}-${year}`;
 };
+
+const noExpenses = computed(() => {
+  return expenses.value.length === 0;
+});
 </script>
 
 <style lang="scss">
@@ -178,6 +199,34 @@ const formatDate = (date) => {
         line-height: 100%;
         margin-left: auto;
       }
+    }
+  }
+
+  .no-expenses-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .no-expenses-text {
+      font-size: 22px;
+      color: $light-text;
+      padding-bottom: 24px;
+      font-weight: 700;
+      text-transform: capitalize;
+      text-align: center;
+    }
+
+    .no-expenses-subtext {
+      font-size: 12px;
+      line-height: 16px;
+      color: $light-text;
+      padding-bottom: 18px;
+    }
+
+    .no-expenses-icon {
+      width: 84px;
+      height: 84px;
+      color: $box-color-light;
     }
   }
 }
