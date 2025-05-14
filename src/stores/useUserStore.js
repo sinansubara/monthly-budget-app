@@ -139,6 +139,15 @@ export const useUserStore = defineStore('user', {
     },
 
     updateExpense(expenseId, updatedData) {
+      if (this.wouldExceedBudget(updatedData.amount, expenseId)) {
+        console.warn(
+          'Updating this expense would exceed your available budget',
+        );
+        return {
+          success: false,
+          error: 'Updated expense exceeds available budget',
+        };
+      }
       const index = this.user.expenses.findIndex((e) => e.id === expenseId);
       if (index !== -1) {
         this.user.expenses[index] = {
@@ -146,9 +155,9 @@ export const useUserStore = defineStore('user', {
           ...updatedData,
         };
         setUserData(this.user); // Update user data in localStorage
-        return true;
+        return { success: true };
       }
-      return false;
+      return { success: false, error: 'Expense not found' };
     },
 
     removeExpense(expenseId) {
