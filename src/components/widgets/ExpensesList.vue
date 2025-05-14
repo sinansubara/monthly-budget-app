@@ -48,6 +48,7 @@
 <script setup>
 import { computed, ref } from 'vue';
 import { useExpenseStore } from '@/stores/useExpensesStore';
+import { useModalStore } from '@/stores/useModalStore';
 import {
   ExpenseCategory,
   ExpenseCategoryNames,
@@ -61,6 +62,7 @@ const DEFAULT_CATEGORY_ALL = {
   name: 'All',
 };
 const expenseStore = useExpenseStore();
+const modalStore = useModalStore();
 
 const storeExpenses = computed(() => {
   return expenseStore.expenses;
@@ -97,6 +99,13 @@ const noExpenses = computed(() => {
 const noExpensesForCategory = computed(() => {
   return !noExpenses.value && expenses.value.length === 0;
 });
+
+const handleRemoveExpense = (expense) => {
+  expenseStore.removeExpense(expense.id);
+};
+const handleEditExpense = (expense) => {
+  modalStore.openModal('edit', expense);
+};
 </script>
 
 <style lang="scss">
