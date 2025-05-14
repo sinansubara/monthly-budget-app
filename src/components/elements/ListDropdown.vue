@@ -60,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, watch, onUnmounted, defineExpose } from 'vue';
+import { ref, nextTick, watch, onUnmounted } from 'vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 
