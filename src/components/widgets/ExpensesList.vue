@@ -49,10 +49,7 @@
 import { computed, ref } from 'vue';
 import { useExpenseStore } from '@/stores/useExpensesStore';
 import { useModalStore } from '@/stores/useModalStore';
-import {
-  ExpenseCategory,
-  ExpenseCategoryNames,
-} from '@/constants/expenseCategories.js';
+import { ListExpenseCategories } from '@/constants/expenseCategories.js';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import ListDropdown from '@/components/elements/ListDropdown.vue';
 import ExpenseItem from '@/components/widgets/ExpenseItem.vue';
@@ -78,12 +75,7 @@ const expenses = computed(() => {
 });
 
 const categoriesMapped = computed(() => {
-  return Object.values(ExpenseCategory).map((value) => {
-    return {
-      id: value,
-      name: ExpenseCategoryNames[value],
-    };
-  });
+  return ListExpenseCategories;
 });
 const filterCategories = computed(() => [
   DEFAULT_CATEGORY_ALL,
