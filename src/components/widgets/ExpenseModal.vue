@@ -165,7 +165,11 @@ const validateForm = () => {
 // Function to submit the expense data
 const submitExpense = () => {
   if (validateForm()) {
-    expenseStore.addExpense(expenseData.value);
+    if (modalStore.modalMode === 'edit') {
+      expenseStore.updateExpense(expenseData.value.id, expenseData.value);
+    } else {
+      expenseStore.addExpense(expenseData.value);
+    }
     closeModal();
   }
 };
