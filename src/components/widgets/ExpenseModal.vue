@@ -143,10 +143,11 @@ const submitButtonText = computed(() =>
 const expenseData = computed(() => modalStore.expenseData); // Bind form data to the store
 
 const UNSELECTED_CATEGORY_ID = 'unselected';
-const selectedCategory = ref({
+const DEFAULT_CATEGORY = {
   id: UNSELECTED_CATEGORY_ID,
   name: 'Category',
-});
+};
+const selectedCategory = ref(DEFAULT_CATEGORY);
 const categoriesMapped = computed(() => {
   return ListExpenseCategories;
 });
@@ -236,6 +237,7 @@ const closeModal = () => {
     date: false,
     amount: false,
   };
+  selectedCategory.value = DEFAULT_CATEGORY; // Reset selected category
   modalStore.closeModal();
 };
 
