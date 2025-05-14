@@ -43,14 +43,10 @@ export const useExpenseStore = defineStore('expenses', {
 
     updateExpense(expenseId, updatedData) {
       const userStore = useUserStore();
-      const index = this.expenses.value.findIndex((e) => e.id === expenseId);
-      if (index !== -1) {
-        this.expenses.value[index] = {
-          ...this.expenses.value[index],
-          ...updatedData,
-        };
-        userStore.updateExpense(expenseId, updatedData); // Call updateExpense action in userStore
-      }
+      const expenseDate = updatedData.date
+        ? new Date(updatedData.date).getTime()
+        : Date.now();
+      userStore.updateExpense(expenseId, { ...updatedData, date: expenseDate });
     },
 
     removeExpense(expenseId) {
