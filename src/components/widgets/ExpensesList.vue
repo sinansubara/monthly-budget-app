@@ -20,7 +20,7 @@
         />
         <IconCustom
           v-else
-          :name="'icon-add'"
+          :name="'savings'"
           class="expense-icon"
         />
         <div class="expense-details">
