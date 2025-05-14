@@ -298,11 +298,9 @@ const submitExpense = () => {
         expenseData.value,
       );
       transactionCompleted = success;
-      console.log('edit check', { transactionCompleted });
     } else {
       const { success } = expenseStore.addExpense(expenseData.value);
       transactionCompleted = success;
-      console.log('add check', { transactionCompleted });
     }
     if (transactionCompleted) {
       closeModal();
