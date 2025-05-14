@@ -32,6 +32,15 @@ export const useUserStore = defineStore('user', {
       );
     },
     /**
+     * Calculates the initial budget based on income and goals.
+     * @returns {number} The initial budget.
+     */
+    getInitialBudget: (state) => {
+      const income = parseFloat(state.user.income) || 0;
+      const goals = parseFloat(state.user.goals) || 0;
+      return income - goals;
+    },
+    /**
      * Calculates the remaining budget after deducting total expenses.
      * @returns {number} The remaining budget.
      */

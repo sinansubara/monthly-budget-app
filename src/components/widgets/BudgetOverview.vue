@@ -47,11 +47,18 @@ const convertToNumber = (value) => {
   return typeof value === 'number' ? value : parseFloat(value);
 };
 
-const userIncome = computed(() => convertToNumber(userStore.getIncome));
 const userSpent = computed(() => convertToNumber(userStore.getTotalExpenses));
 
+const initialBudget = computed(() => {
+  return userStore.getInitialBudget;
+});
+
+const availableBudget = computed(() => {
+  return userStore.getRemainingBudgetDeductingGoals;
+});
+
 const userSpentPercentage = computed(() => {
-  const income = userIncome.value;
+  const income = initialBudget.value;
   if (income <= 0) return 0;
 
   // Calculate percentage based on total income, not remaining budget
@@ -65,7 +72,7 @@ const incomeFormatted = computed(() =>
   convertToCurrency(convertToNumber(userStore.getIncome)),
 );
 const availableFormatted = computed(() =>
-  convertToCurrency(convertToNumber(userStore.getRemainingBudget)),
+  convertToCurrency(availableBudget.value),
 );
 const spentFormatted = computed(() =>
   convertToCurrency(convertToNumber(userStore.getTotalExpenses)),
