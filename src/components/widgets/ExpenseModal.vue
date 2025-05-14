@@ -149,6 +149,7 @@ watch(selectedCategory, (newCategory) => {
     return;
   }
   expenseData.value.category = newCategory.id;
+  handleInputBlur();
 });
 
 const isCategorySelected = computed(() => {
