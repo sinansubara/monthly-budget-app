@@ -1,15 +1,15 @@
 <template>
-  <div class="expense-icon">
-    <ImageCircle
-      v-if="isImageLogo"
-      :image-name="iconName"
-    />
-    <IconCustom
-      v-else
-      :name="iconName"
-      class="expense-icon"
-    />
-  </div>
+  <ImageCircle
+    v-if="isImageLogo"
+    :image-name="iconName"
+    v-bind="$attrs"
+  />
+  <IconCustom
+    v-else
+    :name="iconName"
+    class="expense-icon"
+    v-bind="$attrs"
+  />
 </template>
 
 <script setup>
