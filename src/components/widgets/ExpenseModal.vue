@@ -29,15 +29,28 @@
 
       <!-- Category Input -->
       <div class="input-group">
-        <select
-          v-model="expenseData.category"
+        <ListDropdown
+          v-model="selectedCategory"
+          :items="categoriesMapped"
+          :dropdown-label="'Filter Expenses'"
           :class="{ 'input-error': errors.category }"
         >
-          <option value="food">Food</option>
-          <option value="subscription">Subscription</option>
-          <option value="transport">Transport</option>
-          <option value="miscellaneous">Miscellaneous</option>
-        </select>
+          <template #customTrigger="{ toggle }">
+            <InputPreview
+              placeholder="Category"
+              @click="toggle"
+            >
+              <div
+                v-if="isCategorySelected"
+                class="category-selected"
+              >
+                <ExpenseIcon :icon-name="categoryIcon" /><span>{{
+                  selectedCategory.name
+                }}</span>
+              </div>
+            </InputPreview>
+          </template>
+        </ListDropdown>
         <span
           v-if="errors.category"
           class="error-message"
@@ -93,10 +106,18 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+import { ref, computed, onMounted, onUnmounted, watch } from 'vue';
 import { useModalStore } from '@/stores/useModalStore'; // Import Pinia store
 import { useExpenseStore } from '@/stores/useExpensesStore';
+import {
+  ExpenseCategory,
+  ListExpenseCategories,
+  ExpenseCategoryIcons,
+} from '@/constants/expenseCategories.js';
 import InputCustom from '@/components/elements/InputCustom.vue';
+import ListDropdown from '@/components/elements/ListDropdown.vue';
+import ExpenseIcon from '@/components/elements/ExpenseIcon.vue';
+import InputPreview from '@/components/elements/InputPreview.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
 import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 
@@ -112,6 +133,33 @@ const submitButtonText = computed(() =>
   modalStore.modalMode === 'edit' ? 'Update Expense' : 'Add Expense',
 );
 const expenseData = computed(() => modalStore.expenseData); // Bind form data to the store
+
+const UNSELECTED_CATEGORY_ID = 'unselected';
+const selectedCategory = ref({
+  id: UNSELECTED_CATEGORY_ID,
+  name: 'Category',
+});
+const categoriesMapped = computed(() => {
+  return ListExpenseCategories;
+});
+// Watch for changes in selectedCategory and update expenseData
+watch(selectedCategory, (newCategory) => {
+  if (newCategory.id === UNSELECTED_CATEGORY_ID) {
+    return;
+  }
+  expenseData.value.category = newCategory.id;
+});
+
+const isCategorySelected = computed(() => {
+  return selectedCategory.value.id !== UNSELECTED_CATEGORY_ID;
+});
+
+const categoryIcon = computed(() => {
+  return (
+    ExpenseCategoryIcons[expenseData.value.category] ??
+    ExpenseCategoryIcons[ExpenseCategory.SUBSCRIPTION]
+  );
+});
 
 const errors = ref({
   name: false,
@@ -268,6 +316,25 @@ $closeButtonSize: 48px;
 
       &:last-of-type {
         margin-bottom: 64px;
+      }
+
+      .dropdown-container {
+        width: 100%;
+      }
+
+      .input-preview {
+        .category-selected {
+          position: relative;
+
+          .expense-icon {
+            position: absolute;
+            width: 40px;
+            height: 40px;
+            top: 50%;
+            // 8px is gap between icon and text
+            transform: translate(calc(-100% - 8px), -50%);
+          }
+        }
       }
 
       label {
