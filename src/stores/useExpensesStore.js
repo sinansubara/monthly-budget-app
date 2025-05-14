@@ -38,7 +38,7 @@ export const useExpenseStore = defineStore('expenses', {
         id: currentDate.toString(),
         date: expenseDate,
       };
-      userStore.addExpense(newExpense); // Call addExpense action in userStore
+      return userStore.addExpense(newExpense); // Call addExpense action in userStore
     },
 
     updateExpense(expenseId, updatedData) {
@@ -46,7 +46,10 @@ export const useExpenseStore = defineStore('expenses', {
       const expenseDate = updatedData.date
         ? new Date(updatedData.date).getTime()
         : Date.now();
-      userStore.updateExpense(expenseId, { ...updatedData, date: expenseDate });
+      return userStore.updateExpense(expenseId, {
+        ...updatedData,
+        date: expenseDate,
+      });
     },
 
     removeExpense(expenseId) {
