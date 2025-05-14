@@ -81,13 +81,15 @@
 
       <!-- Amount Input -->
       <div class="input-group">
-        <input
-          v-model="expenseData.amount"
+        <InputCustom
+          :value="expenseData.amount"
           type="number"
-          placeholder="Enter amount"
+          placeholder="Amount"
           min="0.01"
           step="0.01"
           :class="{ 'input-error': errors.amount }"
+          @input="expenseData.amount = $event"
+          @blur="handleInputBlur"
         />
         <span
           v-if="errors.amount"
