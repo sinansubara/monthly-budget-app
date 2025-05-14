@@ -58,6 +58,14 @@ export const useUserStore = defineStore('user', {
       const goals = parseFloat(state.user.goals) || 0;
       return remainingBudget - goals;
     },
+    getGoalAsPercentage: (state) => {
+      const income = parseFloat(state.user.income) || 0;
+      const goals = parseFloat(state.user.goals) || 0;
+      if (income === 0) return 0; // Avoid division by zero
+      const percentage = (goals / income) * 100;
+      // make sure to return integer or number with 1 decimal
+      return Math.round(percentage * 10) / 10;
+    },
     getIsAuthenticated: (state) => state.isAuthenticated,
   },
 

@@ -2,12 +2,19 @@
   <div class="goals-section">
     <span class="card-header-title">Goals</span>
     <div class="goal-text">
-      <p>"Save 10% of this amount entered this month from my salary"</p>
+      "Save {{ goalPercentage }}% of this amount entered this month from my
+      salary"
     </div>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { computed } from 'vue';
+import { useUserStore } from '@/stores/useUserStore';
+
+const userStore = useUserStore();
+const goalPercentage = computed(() => userStore.getGoalAsPercentage);
+</script>
 
 <style lang="scss">
 .goals-section {
