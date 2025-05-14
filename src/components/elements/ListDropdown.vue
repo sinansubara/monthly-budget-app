@@ -84,9 +84,25 @@ const toggleDropdown = () => {
   if (isDropdownOpen.value) {
     nextTick(() => {
       positionDropdown();
+      registerClickOutsideEvents();
     });
+  } else {
+    unregisterClickOutsideEvents();
   }
 };
+
+// Handle clicks outside the dropdown
+const handleOutsideClick = (event) => {
+  if (
+    dropdownMenu.value &&
+    !dropdownMenu.value.contains(event.target) &&
+    dropdownButton.value &&
+    !dropdownButton.value.$el.contains(event.target)
+  ) {
+    isDropdownOpen.value = false;
+  }
+};
+
 function positionDropdown() {
   const dropdownRect = dropdownMenu.value.getBoundingClientRect();
   const triggerRect = dropdownButton.value.$el.getBoundingClientRect();
@@ -108,15 +124,24 @@ const selectOption = (option) => {
   isDropdownOpen.value = false; // Close dropdown after selection
 
   emit('update:modelValue', option); // Emit the selected item
+  unregisterClickOutsideEvents();
 };
 
 const registerPositionEvents = () => {
   window.addEventListener('resize', positionDropdown);
   window.addEventListener('scroll', positionDropdown);
 };
+
 const unregisterPositionEvents = () => {
   window.removeEventListener('resize', positionDropdown);
   window.removeEventListener('scroll', positionDropdown);
+};
+
+const registerClickOutsideEvents = () => {
+  document.addEventListener('mousedown', handleOutsideClick);
+};
+const unregisterClickOutsideEvents = () => {
+  document.removeEventListener('mousedown', handleOutsideClick);
 };
 
 // Watch for window resize to reposition dropdown
@@ -131,6 +156,7 @@ watch(isDropdownOpen, (newValue) => {
 // Cleanup event listeners on component unmount
 onUnmounted(() => {
   unregisterPositionEvents();
+  unregisterClickOutsideEvents();
 });
 </script>
 
