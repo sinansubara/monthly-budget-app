@@ -178,13 +178,6 @@ onUnmounted(() => {
   unregisterPositionEvents();
   unregisterClickOutsideEvents();
 });
-
-// Expose the toggleDropdown function to parent components
-defineExpose({
-  toggleDropdown,
-  selectedOption,
-  isDropdownOpen,
-});
 </script>
 
 <style scoped lang="scss">
