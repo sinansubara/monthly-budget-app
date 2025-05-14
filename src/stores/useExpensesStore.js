@@ -28,12 +28,15 @@ export const useExpenseStore = defineStore('expenses', {
     addExpense(expense) {
       const userStore = useUserStore();
       const currentDate = Date.now();
+      const expenseDate = expense.date
+        ? new Date(expense.date).getTime()
+        : currentDate;
       const defaultCategory = ExpenseCategory.SUBSCRIPTION;
       const newExpense = {
-        id: currentDate.toString(),
-        date: currentDate,
         category: defaultCategory,
         ...expense,
+        id: currentDate.toString(),
+        date: expenseDate,
       };
       userStore.addExpense(newExpense); // Call addExpense action in userStore
     },
