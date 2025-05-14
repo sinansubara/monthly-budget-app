@@ -108,6 +108,11 @@
         :button-text="submitButtonText"
         @click="submitExpense"
       />
+      <span
+        v-if="budgetLimitExceeded"
+        class="error-message budget-exceeded"
+        >You can't add this expense because you exceeded the limit</span
+      >
       <IconCustom
         name="icon-close"
         class="close-btn box-shadow"
@@ -262,6 +267,7 @@ const closeModal = () => {
     amount: false,
   };
   selectedCategory.value = DEFAULT_CATEGORY; // Reset selected category
+  budgetLimitExceeded.value = false;
   modalStore.closeModal();
 };
 
@@ -281,15 +287,28 @@ const validateForm = () => {
   return !Object.values(errors.value).includes(true); // Return true if no errors
 };
 
+const budgetLimitExceeded = ref(false);
 // Function to submit the expense data
 const submitExpense = () => {
   if (validateForm()) {
+    let transactionCompleted = false;
     if (modalStore.modalMode === 'edit') {
-      expenseStore.updateExpense(expenseData.value.id, expenseData.value);
+      const { success } = expenseStore.updateExpense(
+        expenseData.value.id,
+        expenseData.value,
+      );
+      transactionCompleted = success;
+      console.log('edit check', { transactionCompleted });
     } else {
-      expenseStore.addExpense(expenseData.value);
+      const { success } = expenseStore.addExpense(expenseData.value);
+      transactionCompleted = success;
+      console.log('add check', { transactionCompleted });
     }
-    closeModal();
+    if (transactionCompleted) {
+      closeModal();
+    } else {
+      budgetLimitExceeded.value = true;
+    }
   }
 };
 
@@ -325,6 +344,19 @@ $closeButtonSize: 48px;
   align-items: center;
   background-color: $dark-background;
   padding: 27px;
+
+  .error-message {
+    position: absolute;
+    top: 100%;
+    color: $error-color;
+    font-size: 0.875rem;
+
+    &.budget-exceeded {
+      text-align: center;
+      margin-top: 10px;
+      font-size: 20px;
+    }
+  }
 
   /* for bigger screens */
   // background-color: rgba(0, 0, 0, 0.9);
@@ -391,13 +423,6 @@ $closeButtonSize: 48px;
 
       .input-error {
         border-color: $error-color;
-      }
-
-      .error-message {
-        position: absolute;
-        top: 100%;
-        color: $error-color;
-        font-size: 0.875rem;
       }
     }
 
