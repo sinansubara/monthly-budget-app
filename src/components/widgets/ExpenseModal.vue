@@ -120,6 +120,21 @@ const errors = ref({
   amount: false,
 });
 
+const isFormValid = computed(() => {
+  return (
+    !errors.value.name &&
+    !errors.value.category &&
+    !errors.value.date &&
+    !errors.value.amount
+  );
+});
+
+const handleInputBlur = () => {
+  if (!isFormValid.value) {
+    validateForm();
+  }
+};
+
 const isDesktop = ref(true);
 
 const startOfMonth = computed(() => {
