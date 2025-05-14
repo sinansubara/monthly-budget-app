@@ -6,14 +6,9 @@
     @click="handleItemClick"
   >
     <div class="expense-item-wrap">
-      <ImageCircle
-        v-if="expense.logo"
-        :image-name="expense.logo"
-      />
-      <IconCustom
-        v-else
-        :name="'savings'"
-        class="expense-icon"
+      <ExpenseIcon
+        :icon-name="itemIcon"
+        :is-image-logo="isFixedExpense"
       />
       <div class="expense-details">
         <span class="expense-category truncate">{{
@@ -63,11 +58,15 @@
 </template>
 
 <script setup>
-import ImageCircle from '@/components/elements/ImageCircle.vue';
 import IconCustom from '@/components/elements/IconCustom.vue';
-import { ExpenseCategoryNames } from '@/constants/expenseCategories.js';
+import {
+  ExpenseCategory,
+  ExpenseCategoryNames,
+  ExpenseCategoryIcons,
+} from '@/constants/expenseCategories.js';
 import convertToCurrency from '@/utilities/convertToCurrency.js';
-import { ref } from 'vue';
+import ExpenseIcon from '@/components/elements/ExpenseIcon.vue';
+import { computed, ref } from 'vue';
 
 const props = defineProps({
   expense: {
@@ -83,6 +82,21 @@ const actionsVisible = ref(false);
 const getCategoryName = (category) => {
   return ExpenseCategoryNames[category] ?? category;
 };
+
+const isFixedExpense = computed(() => {
+  return !!props.expense.logo;
+});
+
+const categoryIcon = computed(() => {
+  return (
+    ExpenseCategoryIcons[props.expense.category] ??
+    ExpenseCategoryIcons[ExpenseCategory.SUBSCRIPTION]
+  );
+});
+
+const itemIcon = computed(() => {
+  return props.expense.logo || categoryIcon.value;
+});
 
 // format: Month, DD-YYYY
 const formatDate = (date) => {
