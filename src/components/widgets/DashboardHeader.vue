@@ -31,7 +31,13 @@
         </div>
       </div>
     </div>
-    <span class="header-welcome-text"> Welcome, {{ userName }}! </span>
+    <span
+      title="Logout"
+      class="header-welcome-text"
+      @click="handleLogout"
+    >
+      Welcome, {{ userName }}!
+    </span>
   </div>
 </template>
 
@@ -108,6 +114,8 @@ const handleLogout = () => {
     font-size: 16px;
     line-height: 24px;
     color: $white-text;
+    cursor: pointer;
+    width: fit-content;
   }
 
   @media only screen and (min-width: 744px) {
