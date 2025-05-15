@@ -8,13 +8,15 @@
         :dropdown-label="'Filter Expenses'"
       />
     </div>
-    <ExpenseItem
-      v-for="expense in expenses"
-      :key="expense.id"
-      :expense="expense"
-      @remove-expense="handleRemoveExpense"
-      @edit-expense="handleEditExpense"
-    />
+    <div class="expenses-list-content">
+      <ExpenseItem
+        v-for="expense in expenses"
+        :key="expense.id"
+        :expense="expense"
+        @remove-expense="handleRemoveExpense"
+        @edit-expense="handleEditExpense"
+      />
+    </div>
     <div
       v-if="noExpenses"
       class="no-expenses-wrap"
@@ -105,7 +107,6 @@ const handleEditExpense = (expense) => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 1px;
   padding-top: 21px;
   border-top: 1px solid $border-solid-color;
 
@@ -126,6 +127,12 @@ const handleEditExpense = (expense) => {
       display: flex;
       color: white;
     }
+  }
+
+  .expenses-list-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
   }
 
   .no-expenses-wrap {
@@ -153,6 +160,23 @@ const handleEditExpense = (expense) => {
       width: 84px;
       height: 84px;
       color: $box-color-light;
+    }
+  }
+
+  @media only screen and (min-width: 744px) {
+    .expenses-list-header {
+      padding-bottom: 30px;
+
+      .expenses-list-title {
+        font-size: 21px;
+        line-height: 29px;
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .expenses-list-content {
+      overflow: auto;
     }
   }
 }
