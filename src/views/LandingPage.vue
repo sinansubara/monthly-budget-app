@@ -140,7 +140,7 @@ const currentUserMapData = computed(() => {
 });
 
 const checkScreenSize = () => {
-  if (window.innerWidth >= 600) {
+  if (window.innerWidth >= 744) {
     isDesktop.value = true; // Show the image for desktop
   } else {
     isDesktop.value = false; // Hide the image for mobile
@@ -219,8 +219,8 @@ onUnmounted(() => {
       }
     }
   }
-  /* Small devices (portrait tablets and large phones, 600px and up) */
-  @media only screen and (min-width: 600px) {
+  /* Small devices (portrait tablets and large phones, 744px and up) */
+  @media only screen and (min-width: 744px) {
     // Tablet specific styles
     .image-container {
       display: flex;
@@ -250,8 +250,8 @@ onUnmounted(() => {
     }
   }
 
-  /* Large devices (laptops/desktops, 992px and up) */
-  @media only screen and (min-width: 992px) {
+  /* Large devices (laptops/desktops, 1024px and up) */
+  @media only screen and (min-width: 1024px) {
     // Desktop specific styles
     .landing-form {
       padding-left: 120px;
