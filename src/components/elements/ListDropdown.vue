@@ -218,6 +218,7 @@ onUnmounted(() => {
       flex: 1;
       padding-left: 12px;
       width: 100%;
+      gap: 6px;
     }
 
     .dropdown-label {
@@ -229,7 +230,6 @@ onUnmounted(() => {
     .dropdown-selected-text {
       flex: 1;
       color: $secondary-color;
-      // min-width: 0;
     }
 
     .dropdown-arrow {
@@ -276,6 +276,23 @@ onUnmounted(() => {
         &:hover {
           background-color: darken($secondary-color, 30%);
         }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 744px) {
+    .dropdown-button {
+      padding: 4px 12px;
+      font-size: 15px;
+      line-height: 20px;
+
+      .dropdown-label {
+        padding-right: 6px;
+      }
+
+      .dropdown-text-wrap {
+        padding-left: 16px;
+        gap: 9px;
       }
     }
   }
