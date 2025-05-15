@@ -129,6 +129,8 @@ const handleEditExpense = () => {
 </script>
 
 <style lang="scss">
+@use 'sass:color';
+
 .expense-item {
   display: flex;
   align-items: center;
@@ -262,11 +264,11 @@ const handleEditExpense = () => {
   @media only screen and (min-width: 1024px) {
     cursor: pointer;
     &:hover:not(.expense-item-actions) {
-      background-color: lighten($dark-color-base, 5%);
+      background-color: color.adjust($dark-color-base, $lightness: 5%);
     }
     &.expense-item-actions {
       &:hover {
-        background-color: lighten($secondary-color, 40%);
+        background-color: color.adjust($secondary-color, $lightness: 40%);
       }
     }
   }
