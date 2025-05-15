@@ -135,21 +135,3 @@ input[type=number] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
-
-/* Responsive Media Queries */
-/* Mobile first approach */
-
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-  // Tablet specific styles
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  // Larger tablet specific styles
-}
-
-/* Large devices (laptops/desktops, 1024px and up) */
-@media only screen and (min-width: 1024px) {
-  // Desktop specific styles
-}
