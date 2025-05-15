@@ -99,7 +99,7 @@ const handleNewExpense = () => {
     color: $white-text;
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 744px) {
     .header-welcome-text {
       font-size: 18px;
       line-height: 28px;
@@ -136,7 +136,7 @@ const handleNewExpense = () => {
     }
   }
 
-  @media only screen and (min-width: 992px) {
+  @media only screen and (min-width: 1024px) {
     .header-welcome-text {
       display: none;
     }
