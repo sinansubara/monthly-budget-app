@@ -70,7 +70,8 @@ const handleClick = () => {
     }
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 1024px) {
+    // hover effect for desktop
     &:hover {
       background-color: darken($secondary-color, 5%);
     }
