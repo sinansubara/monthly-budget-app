@@ -65,6 +65,8 @@ const handleLogout = () => {
 </script>
 
 <style lang="scss">
+@use 'sass:color';
+
 .dashboard-header {
   display: flex;
   flex-direction: column;
@@ -185,7 +187,7 @@ const handleLogout = () => {
           border-radius: 8px;
 
           &:hover {
-            background-color: lighten($dark-background, 5%);
+            background-color: color.adjust($dark-background, $lightness: 5%);
           }
 
           .user-icon {
