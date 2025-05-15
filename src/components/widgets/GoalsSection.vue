@@ -20,7 +20,6 @@ const goalPercentage = computed(() => userStore.getGoalAsPercentage);
 .goals-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
   gap: 6px;
 
   .goal-text {
