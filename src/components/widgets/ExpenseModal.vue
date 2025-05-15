@@ -319,7 +319,7 @@ const submitExpense = () => {
 };
 
 const checkScreenSize = () => {
-  if (window.innerWidth >= 600) {
+  if (window.innerWidth >= 744) {
     isDesktop.value = true; // Show the image for desktop
   } else {
     isDesktop.value = false; // Hide the image for mobile
@@ -347,12 +347,10 @@ $closeButtonSize: 48px;
   height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
   background-color: $dark-background;
   padding: 27px;
+  overflow: auto;
 
-  /* for bigger screens */
-  // background-color: rgba(0, 0, 0, 0.9);
   .modal-container {
     background-color: $dark-background;
     color: white;
@@ -363,6 +361,7 @@ $closeButtonSize: 48px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    height: fit-content;
 
     /* for bigger screens */
     // border-radius: 8px;
@@ -440,13 +439,19 @@ $closeButtonSize: 48px;
     }
   }
 
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 744px) {
     background-color: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(8px);
 
     .modal-container {
       border-radius: 8px;
-      max-width: 400px;
+      max-width: 450px;
+      padding: 28px;
     }
+  }
+
+  @media only screen and (min-height: 680px) {
+    align-items: center;
   }
 }
 </style>
