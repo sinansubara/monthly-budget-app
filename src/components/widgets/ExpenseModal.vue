@@ -363,11 +363,6 @@ $closeButtonSize: 48px;
     align-items: center;
     height: fit-content;
 
-    /* for bigger screens */
-    // border-radius: 8px;
-    // width: 90%;
-    // max-width: 400px;
-
     .modal-title {
       font-size: 36px;
       text-align: center;
