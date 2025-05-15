@@ -181,6 +181,8 @@ onUnmounted(() => {
 </script>
 
 <style scoped lang="scss">
+@use 'sass:color';
+
 .dropdown-container {
   position: relative;
   display: flex;
@@ -274,7 +276,7 @@ onUnmounted(() => {
         cursor: pointer;
 
         &:hover {
-          background-color: darken($secondary-color, 30%);
+          background-color: color.adjust($secondary-color, $lightness: -30%);
         }
       }
     }
