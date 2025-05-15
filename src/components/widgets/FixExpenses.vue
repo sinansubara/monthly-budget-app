@@ -57,12 +57,37 @@ const handleSelectExpense = (expense) => {
       font-size: 12px;
       line-height: 16px;
       color: $black-text;
-      letter-spacing: 9%;
+      letter-spacing: 0.09em;
       text-transform: uppercase;
     }
 
     .button-custom-wrap {
       margin-left: auto;
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    .fix-expense-item {
+      gap: 12px;
+
+      .image-circle {
+        height: 51px;
+        width: 51px;
+      }
+
+      .fix-expense-name {
+        font-size: 13px;
+        line-height: 18px;
+      }
+
+      .small-button {
+        padding: 2px 14px;
+
+        .button-text {
+          font-size: 15px;
+          line-height: 20px;
+        }
+      }
     }
   }
 }
