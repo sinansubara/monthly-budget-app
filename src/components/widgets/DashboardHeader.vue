@@ -18,7 +18,11 @@
           :button-text="'New Expense'"
           @click="handleNewExpense"
         />
-        <div class="right-user-info">
+        <div
+          title="Logout"
+          class="right-user-info"
+          @click="handleLogout"
+        >
           <IconCustom
             name="user"
             class="user-icon"
@@ -37,13 +41,20 @@ import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { useUserStore } from '@/stores/useUserStore';
 import { useModalStore } from '@/stores/useModalStore';
 import { computed } from 'vue';
+import { useRouter } from 'vue-router';
 
 const userStore = useUserStore();
 const modalStore = useModalStore();
+const router = useRouter();
 const userName = computed(() => userStore.getName);
 
 const handleNewExpense = () => {
   modalStore.openModal();
+};
+
+const handleLogout = () => {
+  userStore.logout();
+  router.push('/');
 };
 </script>
 
@@ -162,6 +173,12 @@ const handleNewExpense = () => {
           display: flex;
           align-items: center;
           gap: 6px;
+          cursor: pointer;
+          border-radius: 8px;
+
+          &:hover {
+            background-color: lighten($dark-background, 5%);
+          }
 
           .user-icon {
             width: 38px;
