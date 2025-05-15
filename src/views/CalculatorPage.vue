@@ -2,23 +2,27 @@
   <div class="calculator-page">
     <DashboardHeader />
 
-    <InfoCard title="Calculation">
-      <template #content>
-        <BudgetOverview />
-      </template>
-    </InfoCard>
-    <InfoCard title="Optionals">
-      <template #content>
-        <CardSection
-          title="Choose any fix expenses"
-          class="section-fix-expenses"
-        >
-          <FixExpenses />
-        </CardSection>
-        <GoalsSection />
-      </template>
-    </InfoCard>
-    <ExpensesList />
+    <div class="calculator-content-wrap">
+      <div class="calculator-cards-wrap">
+        <InfoCard title="Calculation">
+          <template #content>
+            <BudgetOverview />
+          </template>
+        </InfoCard>
+        <InfoCard title="Optionals">
+          <template #content>
+            <CardSection
+              title="Choose any fix expenses"
+              class="section-fix-expenses"
+            >
+              <FixExpenses />
+            </CardSection>
+            <GoalsSection />
+          </template>
+        </InfoCard>
+      </div>
+      <ExpensesList />
+    </div>
     <IconCustom
       name="icon-add"
       class="circle-add-icon box-shadow"
@@ -58,6 +62,19 @@ const handleNewExpense = () => {
   height: 100%;
   gap: 32px;
 
+  .calculator-content-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: inherit;
+
+    .calculator-cards-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: inherit;
+      height: fit-content;
+    }
+  }
+
   .dashboard-header {
     padding-bottom: 24px;
     border-bottom: 1px solid $border-solid-color;
@@ -83,14 +100,40 @@ const handleNewExpense = () => {
     }
   }
 
-  @media (min-width: 600px) {
+  @media only screen and (min-width: 744px) {
+    // tablet styles
     .circle-add-icon {
       display: none;
     }
+
+    .calculator-content-wrap {
+      .calculator-cards-wrap {
+        flex-wrap: nowrap;
+        gap: 58px;
+        justify-content: space-between;
+      }
+    }
   }
-  // @media (min-width: 768px) {
-  // }
-  // @media (min-width: 1024px) {
-  // }
+  @media only screen and (min-width: 1024px) {
+    // desktop styles
+    padding-bottom: 24px;
+    max-height: 100vh;
+
+    .calculator-content-wrap {
+      flex-direction: row-reverse;
+      overflow: auto;
+
+      .calculator-cards-wrap {
+        flex-wrap: nowrap;
+        gap: 42px;
+        justify-content: space-between;
+        flex-basis: 50%;
+      }
+      .expenses-list {
+        flex-basis: 50%;
+        border: unset;
+      }
+    }
+  }
 }
 </style>
