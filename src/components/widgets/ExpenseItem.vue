@@ -134,6 +134,7 @@ const handleEditExpense = () => {
   align-items: center;
   border-top: 1px dotted $border-dotted-color;
   height: 75px;
+  flex-shrink: 0;
 
   .expense-item-wrap {
     display: flex;
@@ -193,7 +194,6 @@ const handleEditExpense = () => {
     .actions-buttons-wrap {
       display: flex;
       gap: 24px;
-      // gap: 55px; // for bigger screen
 
       .action-button {
         display: flex;
@@ -209,6 +209,64 @@ const handleEditExpense = () => {
           font-size: 18px;
           text-transform: capitalize;
         }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 744px) {
+    height: 103px;
+
+    .expense-item-wrap {
+      gap: 18px;
+
+      .image-circle,
+      .expense-icon {
+        width: 54px;
+        height: 54px;
+      }
+
+      .expense-date-wrap {
+        gap: 12px;
+
+        .expense-date-text {
+          font-size: 15px;
+          line-height: 20px;
+        }
+
+        .expense-date {
+          font-size: 16px;
+          line-height: 20px;
+        }
+      }
+    }
+    &.expense-item-actions {
+      .actions-buttons-wrap {
+        gap: 55px;
+
+        .action-button {
+          padding: 8px 16px;
+
+          .action-icon {
+            width: 28px;
+            height: 28px;
+          }
+
+          .action-text {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+
+  @media only screen and (min-width: 1024px) {
+    cursor: pointer;
+    &:hover:not(.expense-item-actions) {
+      background-color: lighten($dark-color-base, 5%);
+    }
+    &.expense-item-actions {
+      &:hover {
+        background-color: lighten($secondary-color, 40%);
       }
     }
   }
