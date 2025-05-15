@@ -18,8 +18,13 @@ body {
 }
 
 #app {
-  height: auto;
-  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;  /* This ensures the app takes the full height of the screen */
+}
+
+.calculator-page {
+  flex-grow: 1;  /* This allows the main content to grow and fill the available space */
 }
 
 /* Global Styles */
@@ -73,6 +78,7 @@ body {
   font-size: 30px;
   line-height: 36px;
   color: $dark-text;
+  text-align: center;
 }
 
 .input-custom {
