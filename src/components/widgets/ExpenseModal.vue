@@ -184,6 +184,14 @@ watch(storedCategory, (newVal) => {
   }
 });
 
+watch(isModalVisible, (newVal) => {
+  if (newVal) {
+    document.body.classList.add('modal-open');
+  } else {
+    document.body.classList.remove('modal-open');
+  }
+});
+
 const isCategorySelected = computed(() => {
   return selectedCategory.value.id !== UNSELECTED_CATEGORY_ID;
 });

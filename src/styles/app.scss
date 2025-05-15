@@ -11,6 +11,10 @@ body {
   color: $dark-text;
   background-color: $light-background;
   user-select: none;
+
+  &.modal-open {
+    overflow: hidden;
+  }
 }
 
 #app {
