@@ -111,7 +111,7 @@
       <span
         v-if="budgetLimitExceeded"
         class="error-message budget-exceeded"
-        >You can't add this expense because you exceeded the limit</span
+        >{{ limitExceededMessage }}</span
       >
       <IconCustom
         name="icon-close"
@@ -296,6 +296,12 @@ const validateForm = () => {
 };
 
 const budgetLimitExceeded = ref(false);
+
+const limitExceededMessage = computed(() => {
+  return `You can't ${
+    modalStore.modalMode === 'edit' ? 'update' : 'add'
+  } this expense because it would exceed the limit`;
+});
 // Function to submit the expense data
 const submitExpense = () => {
   if (validateForm()) {

@@ -4,6 +4,7 @@ import {
   setUserData,
   removeUserData,
 } from '@/utilities/localStorageUtils';
+import { useToastStore } from '@/stores/useToastStore';
 
 export const useUserStore = defineStore('user', {
   state: () => {
@@ -129,20 +130,36 @@ export const useUserStore = defineStore('user', {
 
     // Expense-related actions
     addExpense(expense) {
+      const toastStore = useToastStore();
       if (this.wouldExceedBudget(expense.amount)) {
-        console.warn('Adding this expense would exceed your available budget');
+        toastStore.showToast({
+          message: `You can't add this expense because it would exceed the limit`,
+          icon: '⚠️',
+          type: 'error',
+          duration: 3000,
+        });
         return { success: false, error: 'Expense exceeds available budget' };
       }
       this.user.expenses.push(expense);
       setUserData(this.user); // Update user data in localStorage
+      toastStore.showToast({
+        message: `Expense "${expense.name}" added successfully`,
+        icon: '✅',
+        type: 'success',
+        duration: 3000,
+      });
       return { success: true };
     },
 
     updateExpense(expenseId, updatedData) {
+      const toastStore = useToastStore();
       if (this.wouldExceedBudget(updatedData.amount, expenseId)) {
-        console.warn(
-          'Updating this expense would exceed your available budget',
-        );
+        toastStore.showToast({
+          message: `You can't update this expense because it would exceed the limit`,
+          icon: '⚠️',
+          type: 'error',
+          duration: 5000,
+        });
         return {
           success: false,
           error: 'Updated expense exceeds available budget',
@@ -155,8 +172,20 @@ export const useUserStore = defineStore('user', {
           ...updatedData,
         };
         setUserData(this.user); // Update user data in localStorage
+        toastStore.showToast({
+          message: `Expense "${updatedData.name}" updated successfully`,
+          icon: '✅',
+          type: 'success',
+          duration: 3000,
+        });
         return { success: true };
       }
+      toastStore.showToast({
+        message: `Expense not found`,
+        icon: '❌',
+        type: 'error',
+        duration: 3000,
+      });
       return { success: false, error: 'Expense not found' };
     },
 
