@@ -152,10 +152,14 @@ export const useUserStore = defineStore('user', {
     },
 
     updateExpense(expenseId, updatedData) {
+      const toastStore = useToastStore();
       if (this.wouldExceedBudget(updatedData.amount, expenseId)) {
-        console.warn(
-          'Updating this expense would exceed your available budget',
-        );
+        toastStore.showToast({
+          message: `You can't update this expense because it would exceed the limit`,
+          icon: '⚠️',
+          type: 'error',
+          duration: 5000,
+        });
         return {
           success: false,
           error: 'Updated expense exceeds available budget',
@@ -168,8 +172,20 @@ export const useUserStore = defineStore('user', {
           ...updatedData,
         };
         setUserData(this.user); // Update user data in localStorage
+        toastStore.showToast({
+          message: `Expense "${updatedData.name}" updated successfully`,
+          icon: '✅',
+          type: 'success',
+          duration: 3000,
+        });
         return { success: true };
       }
+      toastStore.showToast({
+        message: `Expense not found`,
+        icon: '❌',
+        type: 'error',
+        duration: 3000,
+      });
       return { success: false, error: 'Expense not found' };
     },
 
