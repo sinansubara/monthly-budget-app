@@ -53,9 +53,11 @@ import ButtonCustom from '@/components/elements/ButtonCustom.vue';
 import { setUserData } from '@/utilities/localStorageUtils';
 import { useRouter } from 'vue-router';
 import { useUserStore } from '@/stores/useUserStore';
+import { useToastStore } from '@/stores/useToastStore';
 
 const router = useRouter();
 const userStore = useUserStore();
+const toastStore = useToastStore();
 
 const funnyErrorMessages = [
   "Whoa! Goal's above your income — try shrinking it.",
@@ -152,7 +154,20 @@ const handleCalculation = () => {
     if (isGoalLargerThanIncome.value) {
       showErrorMessage.value = true;
       setRandomErrorMessage();
+      toastStore.showToast({
+        message: randomErrorMessage.value,
+        type: 'warning',
+        icon: '📉',
+        duration: 3000,
+      });
+      return;
     }
+    toastStore.showToast({
+      message: 'Please fill in all fields correctly.',
+      type: 'error',
+      icon: '📝',
+      duration: 3000,
+    });
     return;
   }
   userStore.login(currentUserMapData.value);
