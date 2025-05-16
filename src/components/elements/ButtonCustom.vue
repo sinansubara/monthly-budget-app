@@ -39,6 +39,8 @@ const handleClick = () => {
 </script>
 
 <style lang="scss">
+@use 'sass:color';
+
 .button-custom-wrap {
   display: flex;
   justify-content: center;
@@ -73,11 +75,11 @@ const handleClick = () => {
   @media only screen and (min-width: 1024px) {
     // hover effect for desktop
     &:hover {
-      background-color: darken($secondary-color, 5%);
+      background-color: color.adjust($secondary-color, $lightness: -5%);
     }
     &.small-button {
       &:hover {
-        background-color: darken($primary-color, 7%);
+        background-color: color.adjust($primary-color, $lightness: -7%);
       }
     }
   }
