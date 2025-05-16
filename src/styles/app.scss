@@ -20,11 +20,11 @@ body {
 #app {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;  /* This ensures the app takes the full height of the screen */
+  min-height: 100vh; /* This ensures the app takes the full height of the screen */
 }
 
 .calculator-page {
-  flex-grow: 1;  /* This allows the main content to grow and fill the available space */
+  flex-grow: 1; /* This allows the main content to grow and fill the available space */
 }
 
 /* Global Styles */
@@ -108,26 +108,26 @@ body {
 }
 
 .error-message {
-    position: absolute;
-    top: 100%;
-    color: $error-color;
-    font-size: 0.875rem;
+  position: absolute;
+  top: 100%;
+  color: $error-color;
+  font-size: 0.875rem;
 
-    &.budget-exceeded {
-      text-align: center;
-      margin-top: 10px;
-      font-size: 20px;
-    }
-
-    &.landing-error-message {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-      font-size: 20px;
-      top: unset;
-      position: relative;
-    }
+  &.budget-exceeded {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 20px;
   }
+
+  &.landing-error-message {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 20px;
+    top: unset;
+    position: relative;
+  }
+}
 
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
@@ -137,7 +137,7 @@ input::-webkit-inner-spin-button {
 }
 
 /* Firefox */
-input[type=number] {
+input[type='number'] {
   -moz-appearance: textfield;
   appearance: textfield;
 }
